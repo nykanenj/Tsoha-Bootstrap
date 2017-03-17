@@ -2,8 +2,8 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](nykanenj.users.cs.helsinki.fi/Tsoha)
-* [Linkki dokumentaatiooni](https://www.github.com/nykanenj/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+* [Linkki sovellukseeni](https://nykanenj.users.cs.helsinki.fi/Tsoha)
+* [Linkki dokumentaatiooni](doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
