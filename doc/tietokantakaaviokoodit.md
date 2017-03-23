@@ -1,4 +1,4 @@
-Tietokantakaaviot tehty yuml.me sivun avulla.
+# Tietokantakaaviot tehty yuml.me sivun avulla
 
 Kaavion luomiseen tarvittava koodi:
 
