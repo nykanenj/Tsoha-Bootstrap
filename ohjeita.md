@@ -1,5 +1,5 @@
 # Muistiinpanoja itselle
-Mene aina ensimmäiseksi terminaalilla projektin juurikansioon, esim. Tsoha-Bootstrap
+Mene aina ensimmäiseksi terminaalilla projektin juurikansioon, esim. cd Tsoha-Bootstrap
 
 ## Käyttö kotoa
 git pull työpöydälle virtualboxissa
