@@ -1,25 +1,21 @@
 <?php
 
 $routes->get('/', function() {
-    HelloWorldController::index();
-});
-
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+    MainController::login();
 });
 
 $routes->get('/login', function() {
-    HelloWorldController::login();
+    MainController::login();
 });
 
 $routes->get('/overview', function() {
-    HelloWorldController::overview();
+    MainController::overview();
 });
 
 $routes->get('/query', function() {
-    HelloWorldController::query();
+    MainController::query();
 });
 
-$routes->get('/query_results', function() {
-    HelloWorldController::query_results();
+$routes->get('/sandbox', function() {
+    MainController::sandbox();
 });
