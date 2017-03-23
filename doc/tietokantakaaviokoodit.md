@@ -1,7 +1,8 @@
-# Tietokantakaaviot tehty yuml.me sivun avulla
+### Tietokantakaaviot tehty yuml.me sivun avulla
 
 Kaavion luomiseen tarvittava koodi:
 
+```
  // Questionnaire Database Diagram.  
 [Question]1-*[Answer]  
 [Respondent]1-*[QuestionnairesRespondents]  
@@ -9,3 +10,4 @@ Kaavion luomiseen tarvittava koodi:
 [Questionnaire]1-*[QuestionnairesQuestions]  
 [Question]1-*[QuestionnairesQuestions]   
 [CustomerCompany]1-*[Questionnaire]  
+```
