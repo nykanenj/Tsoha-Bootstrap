@@ -10,5 +10,7 @@ git pull
 
 ## Kun lopettaa työskentelyn
 git add .
+
 git commit -m "Kuvaus muutoksista tähän"
+
 git push
