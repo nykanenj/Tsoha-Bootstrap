@@ -1,1 +1,5 @@
--- Lisää DROP TABLE lauseet tähän tiedostoon
+DROP TABLE IF EXISTS customercompany CASCADE;
+DROP TABLE IF EXISTS questionnaire CASCADE;
+DROP TABLE IF EXISTS question CASCADE;
+DROP TABLE IF EXISTS answer CASCADE;
+DROP TABLE IF EXISTS questionnairesQuestions CASCADE;
