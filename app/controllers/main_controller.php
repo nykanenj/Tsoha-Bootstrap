@@ -13,6 +13,14 @@ class MainController extends BaseController {
     public static function query() {
         View::make('suunnitelmat/query.html');
     }
+    
+    public static function edit() {
+        View::make('suunnitelmat/edit.html');
+    }
+    
+    public static function remove() {
+        View::make('suunnitelmat/remove.html');
+    }
 
     public static function sandbox() {
         // Testaa koodiasi täällä

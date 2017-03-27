@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Query</h1>
+<h1>Edit</h1>
 
-<input class="form-control" placeholder="Make query here to search for data" type="text">
+<input class="form-control" placeholder="Make query here then edit and save results below" type="text">
 <button class="btn btn-primary">Search</button>
 
 
 
-<h2>Query results</h2>
+<h2>Edit below</h2>
 
 <table class="table table-striped table-bordered">
     <thead>
@@ -23,7 +23,7 @@
     </thead>
 
     <tbody>
-        <!-- Listataan pelit tähän -->
+        <!-- Listataan datarivit tähän -->
         <tr>
             <td><a href="#"> 1234567 </a></td>
             <td>23.3.2017</td>
@@ -31,6 +31,7 @@
             <td>Hp</td>
             <td>Acer</td>
             <td>Asus</td>
+            <th><a class="btn btn-default btn-sm" href="#">Edit</a></th>
         </tr>
         <tr>
             <td><a href="#"> 1234567 </a></td>
@@ -39,7 +40,10 @@
             <td>Asus</td>
             <td>Dell</td>
             <td>Toshiba</td>
+            <th><a class="btn btn-default btn-sm" href="#">Edit</a></th>
         </tr>
     </tbody>
 </table>
+    <button class="btn btn-success">Save</button>
+    <button class="btn btn-danger">Cancel</button>
 {% endblock %}
