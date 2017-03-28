@@ -25,9 +25,11 @@ class MainController extends BaseController {
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        $mummonpullat = Record::find('Mummonpullat pilottikysely');
+        $mummonpullat = Record::findQuestionnaire('Mummonpullat pilottikysely');
+        $maistanut = Record::findqid('maistanut');
         $data = Record::getAllData();
         Kint::dump($mummonpullat);
+        Kint::dump($maistanut);
         Kint::dump($data);
     }
 
