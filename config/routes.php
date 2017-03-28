@@ -9,7 +9,7 @@ $routes->get('/login', function() {
 });
 
 $routes->get('/overview', function() {
-    MainController::overview();
+    DataController::overview();
 });
 
 $routes->get('/query', function() {
@@ -22,6 +22,10 @@ $routes->get('/edit', function() {
 
 $routes->get('/remove', function() {
     MainController::remove();
+});
+
+$routes->get('/query/:questionnaire_name', function($questionnaire_name) {
+    DataController::show($questionnaire_name);
 });
 
 $routes->get('/sandbox', function() {

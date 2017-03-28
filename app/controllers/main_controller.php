@@ -1,33 +1,32 @@
 <?php
 
-require 'app/models/record.php';
 class MainController extends BaseController {
 
     public static function login() {
-        View::make('suunnitelmat/login.html');
+        View::make('questionnairewebpages/login.html');
     }
 
     public static function overview() {
-        View::make('suunnitelmat/overview.html');
+        View::make('questionnairewebpages/overview.html');
     }
 
     public static function query() {
-        View::make('suunnitelmat/query.html');
+        View::make('questionnairewebpages/query.html');
     }
     
     public static function edit() {
-        View::make('suunnitelmat/edit.html');
+        View::make('questionnairewebpages/edit.html');
     }
     
     public static function remove() {
-        View::make('suunnitelmat/remove.html');
+        View::make('questionnairewebpages/remove.html');
     }
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        $mummonpullat = Record::findQuestionnaire('Mummonpullat pilottikysely');
-        $maistanut = Record::findqid('maistanut');
-        $data = Record::getAllData();
+        $mummonpullat = Datacruncher::findQuestionnaire('Mummonpullat pilottikysely');
+        $maistanut = Datacruncher::findqid('maistanut');
+        $data = Datacruncher::getAllData();
         Kint::dump($mummonpullat);
         Kint::dump($maistanut);
         Kint::dump($data);
