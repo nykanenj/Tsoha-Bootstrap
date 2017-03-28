@@ -11,7 +11,7 @@ CREATE TABLE questiondata(
   customer_company varchar(40) NOT NULL, 
   vat_number char(9) NOT NULL,
   question varchar(50) NOT NULL,
-  qID varchar(30) NOT NULL,
+  qid varchar(30) NOT NULL,
   answer varchar(40) NOT NULL
 );
 

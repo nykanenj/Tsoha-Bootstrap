@@ -1,5 +1,6 @@
 <?php
 
+require 'app/models/record.php';
 class MainController extends BaseController {
 
     public static function login() {
@@ -24,7 +25,10 @@ class MainController extends BaseController {
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        View::make('sandbox.html');
+        $mummonpullat = Record::find('Mummonpullat pilottikysely');
+        $data = Record::getAllData();
+        Kint::dump($mummonpullat);
+        Kint::dump($data);
     }
 
 }
