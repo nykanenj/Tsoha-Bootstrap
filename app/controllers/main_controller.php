@@ -21,10 +21,14 @@ class MainController extends BaseController {
     public static function remove() {
         View::make('questionnairewebpages/remove.html');
     }
+    
+    public static function add() {
+        View::make('questionnairewebpages/add.html');
+    }
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        $mummonpullat = Datacruncher::findQuestionnaire('Mummonpullat pilottikysely');
+        $mummonpullat = Datacruncher::findQuestionnaire('Mummonpullat_pilottikysely');
         $maistanut = Datacruncher::findqid('maistanut');
         $data = Datacruncher::getAllData();
         Kint::dump($mummonpullat);

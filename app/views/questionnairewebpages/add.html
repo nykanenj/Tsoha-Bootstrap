@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Add questionnairedata to database</h1>
+
+  <form method="post" action="{{base_path}}/insertdata">
+    <div class="form-group">
+      <label>Questionnaire name</label>
+      <input name="questionnaire_name" class="form-control" type="text">
+    </div>
+
+    <div class="form-group">
+      <label>Date</label>
+      <input name="project_start" class="form-control" type="text">
+    </div>
+
+    <div class="form-group">
+      <label>Customer company</label>
+      <input name="customer_company" class="form-control" type="text">
+    </div>
+
+    <div class="form-group">
+      <label>VAT number</label>
+      <input name="vat_number" class="form-control" type="text">
+    </div>
+    
+    <div class="form-group">
+      <label>Question</label>
+      <input name="question" class="form-control" type="text">
+    </div>
+    
+    <div class="form-group">
+      <label>qID</label>
+      <input name="qid" class="form-control" type="text">
+    </div>
+
+    <div class="form-group">
+      <label>Answer</label>
+      <input name="answer" class="form-control" type="text">
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Add</button>
+    </div>
+  </form>
+{% endblock %}
