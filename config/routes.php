@@ -10,6 +10,10 @@ $routes->get('/login', function() {
     MainController::login();
 });
 
+$routes->get('/test.html', function() {
+    MainController::login();
+});
+
 $routes->get('/overview', function() {
     DataController::overview();
 });

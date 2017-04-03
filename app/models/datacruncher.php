@@ -2,10 +2,11 @@
 
 class Datacruncher extends BaseModel {
 
-    public $questiondata_id, $project_start, $questionnaire_name, $customer_company, $vat_number, $question, $qid, $answer;
+    public $questiondata_id, $project_start, $questionnaire_name, $customer_company, $vat_number, $question, $qid, $answer, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_string_length', 'validate_string_not_empty');
     }
     
     public function save(){
