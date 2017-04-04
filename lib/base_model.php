@@ -40,18 +40,18 @@
 	
 	    if ($minlength == 1) {
 	    
-	    	$errors[] = $field_name . ': Kenttää ei saa jättää tyhjäksi!';
+	    	$errors[] = $field_name . ': Field cannot be empty!';
 	
 	    } else { 
 	    
-	    	$errors[] = $field_name . ': Syötteen pitää olla vähintään ' . $minlength . ' merkkiä pitkä!';
+	    	$errors[] = $field_name . ': Input has to be atleast ' . $minlength . ' characters!';
 	    }
 		
       }
       
       if(strlen($string) > $maxlength) {
 	
-	    $errors[] = $field_name . ': Syötetty teksti liian pitkä! Sori.';
+	    $errors[] = $field_name . ': Input text to long! Sorry...';
 		
       }
       
@@ -65,7 +65,7 @@
     
       if($string == '') {
 	  
-	    $errors[] = $field_name . ': Kenttää ei saa jättää tyhjäksi!';
+	    $errors[] = $field_name . ': Field cannot be empty!';
 	  
 	  }
     

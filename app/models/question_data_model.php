@@ -6,7 +6,7 @@ class QuestionDataModel extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_questionnaire_name', 'validate_customer_company', 'validate_qid', 'validate_question', 'validate_answer', ); //Add more with a comma
+        $this->validators = array('validate_questionnaire_name', 'validate_project_start', 'validate_customer_company', 'validate_vat_number', 'validate_qid', 'validate_question', 'validate_answer', ); //Add more with a comma
     }
     
     public function save(){
@@ -96,9 +96,41 @@ class QuestionDataModel extends BaseModel {
     
     }
     
+    public function validate_project_start(){
+    
+    	$errors = array();
+    	$datepattern = '/^((0?[1-9])|([1-2][0-9])|(3[0-1]))-' . 
+    	               '((0?[1-9])|(1[0-2]))-' .
+    	               '((19|20)?\d\d)$/i';
+    
+    	if (preg_match($datepattern, $this->project_start) == 0) {
+    	
+    		$errors[] = 'Date: Project start date does not match correct form. Write in form dd-mm-yy';
+    	
+    	} 
+    
+  	return $errors;
+    }    
+    
+    
     public function validate_customer_company(){
     
   	return parent::validate_string_length($this->customer_company, 1, 40, 'Customer company');
+    
+    }
+    
+    public function validate_vat_number(){
+    
+    	$errors = array();
+    	$vatpattern = '/^\d{7}-\d$/i';
+    
+    	if (preg_match($vatpattern, $this->vat_number) == 0) {
+    	
+    		$errors[] = 'Vat number: Does not match correct form. Check that it matches the form 1234567-8. Make sure there are no extra spaces before or after the number.';
+    	
+    	} 
+    
+  	return $errors;
     
     }
     
