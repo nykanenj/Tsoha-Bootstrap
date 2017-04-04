@@ -28,12 +28,16 @@ class MainController extends BaseController {
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        $mummonpullat = Datacruncher::findQuestionnaire('Mummonpullat_pilottikysely');
-        $maistanut = Datacruncher::findqid('maistanut');
-        $data = Datacruncher::getAllData();
-        Kint::dump($mummonpullat);
-        Kint::dump($maistanut);
-        Kint::dump($data);
+        $hedelmatehdas = new QuestionDataModel(array(
+        'questionnaire_name' => '',
+        'project_start' => '1.4.2017',
+        'vat_number' => '0987654-3'
+        ));
+	
+	$errors = $hedelmatehdas->errors();
+	
+	Kint::dump($errors);
+
     }
 
 }

@@ -3,19 +3,19 @@
 class DataController extends BaseController {
     
     public static function overview(){
-        $data = Datacruncher::getAllData();
+        $data = QuestionDataModel::getAllData();
         View::make('questionnairewebpages/overview.html', array('data' => $data));
     }
     
     public static function show($questionnaire_name){
-        $data = Datacruncher::findQuestionnaire($questionnaire_name);
+        $data = QuestionDataModel::findQuestionnaire($questionnaire_name);
         View::make('questionnairewebpages/overview.html', array('data' => $data));
     }
     
     public static function insertdata() {
         $params = $_POST;
         
-        $datarow = new Datacruncher(array(
+        $attributes = array(
         'questionnaire_name' => $params['questionnaire_name'],
         'project_start' => $params['project_start'],
         'customer_company' => $params['customer_company'],
@@ -23,13 +23,21 @@ class DataController extends BaseController {
         'question' => $params['question'],
         'qid' => $params['qid'],
         'answer' => $params['answer']
-        ));
+        );
         
-        Kint::dump($params);
+        $datarow = new QuestionDataModel($attributes);
+        $errors = $datarow->errors();
         
-        $datarow->save();
+        if(count($errors) == 0){
         
-        Redirect::to('/overview', array('message' => 'Data added to database!'));
+        	$datarow->save();
+        	Redirect::to('/overview', array('message' => 'Data added to database!'));
+        	
+        } else {
+        
+        	View::make('questionnairewebpages/add.html', array('errors' => $errors, 'attributes' => $attributes));
+        
+        }
          
     }
 }

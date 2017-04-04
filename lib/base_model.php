@@ -15,32 +15,43 @@
       }
     }
 
+    //Check all code below, under construction
+
     public function errors(){
-      // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
-      $errors = array();
+    
+	$errors = array();
+	//$validator_errors = array();
 
       foreach($this->validators as $validator){
         // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+       	  $validator_errors = $this->{$validator}();
+	  $errors = array_merge($errors, $validator_errors);
       }
 
       return $errors;
     }
     
-    //Check all code below, under construction
     
-    public function validate_string_length($string, $minlength, $maxlength){
+    public function validate_string_length($string, $minlength, $maxlength, $field_name){
     
       $errors = array();
     
       if(strlen($string) < $minlength) {
 	
-	    $errors[] = 'Syötetty teksti liian lyhyt';
+	    if ($minlength == 1) {
+	    
+	    	$errors[] = $field_name . ': Kenttää ei saa jättää tyhjäksi!';
+	
+	    } else { 
+	    
+	    	$errors[] = $field_name . ': Syötteen pitää olla vähintään ' . $minlength . ' merkkiä pitkä!';
+	    }
 		
       }
       
       if(strlen($string) > $maxlength) {
 	
-	    $errors[] = 'Syötetty teksti liian pitkä';
+	    $errors[] = $field_name . ': Syötetty teksti liian pitkä! Sori.';
 		
       }
       
@@ -48,31 +59,17 @@
     
     }
     
-    public function validate_string_not_empty($string){
+    public function validate_string_not_empty($string, $field_name){
     
 	  $errors = array();
     
       if($string == '') {
 	  
-	    $errors[] = 'Teksti ei saa olla tyhjä'
+	    $errors[] = $field_name . ': Kenttää ei saa jättää tyhjäksi!';
 	  
 	  }
     
-      return errors;
+      return $errors;
     
     }
-    
-    //Where does $validators come from?
-    public function errors(){
-	
-	$errors = array();
-	$validator_errors = array();
-	
-	foreach ($validators as $validator)
-	  $validator_errors = this->{$validator}();
-	  $errors = array_merge($errors, $validator_errors);
-	
-	}
-    
-
   }

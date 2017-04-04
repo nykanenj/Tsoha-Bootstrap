@@ -1,12 +1,12 @@
 <?php
 
-class Datacruncher extends BaseModel {
+class QuestionDataModel extends BaseModel {
 
     public $questiondata_id, $project_start, $questionnaire_name, $customer_company, $vat_number, $question, $qid, $answer, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_string_length', 'validate_string_not_empty');
+        $this->validators = array('validate_questionnaire_name', 'validate_customer_company', 'validate_qid', 'validate_question', 'validate_answer', ); //Add more with a comma
     }
     
     public function save(){
@@ -89,5 +89,38 @@ class Datacruncher extends BaseModel {
 
         return null;
     }
-
+    
+    public function validate_questionnaire_name(){
+    
+    	return parent::validate_string_length($this->questionnaire_name, 1, 40, 'Questionnaire name');
+    
+    }
+    
+    public function validate_customer_company(){
+    
+  	return parent::validate_string_length($this->customer_company, 1, 40, 'Customer company');
+    
+    }
+    
+    public function validate_qid(){
+    
+  	return parent::validate_string_length($this->qid, 1, 30, 'qid');
+    
+    }
+    
+    public function validate_question(){
+    
+  	return parent::validate_string_length($this->question, 1, 50, 'Question');
+    
+    }
+    
+    public function validate_answer(){
+    
+  	return parent::validate_string_length($this->answer, 1, 40, 'Answer');
+    
+    }
+    
+    
+    
+    
 }
