@@ -1,49 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Edit</h1>
+  <h1>Edit</h1>
+  
+  {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 
-<input class="form-control" placeholder="Make query here then edit and save results below" type="text">
-<button class="btn btn-primary">Search</button>
 
+  <form method="post" action="{{base_path}}/update/{{attributes.questiondata_id}}">
+    <div class="form-group">
+      <label class="control-label">Questionnaire name*</label>
+      <input name="questionnaire_name" class="form-control" value="{{attributes.questionnaire_name}}" type="text">
+    </div>
 
+    <div class="form-group">
+      <label class="control-label">Date* (dd-mm-yy)</label>
+      <input name="project_start" class="form-control" value="{{attributes.project_start}}" type="text">
+    </div>
 
-<h2>Edit below</h2>
+    <div class="form-group">
+      <label class="control-label">Customer company*</label>
+      <input name="customer_company" class="form-control" value="{{attributes.customer_company}}" type="text">
+    </div>
 
-<table class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>QuestionnaireID</th>
-            <th>Date</th>
-            <th>Company</th>
-            <th>recognition_1 : What computer brands first come to your mind? (Response 1) </th>
-            <th>recognition_2 : What computer brands first come to your mind? (Response 2) </th>
-            <th>recognition_3 : What computer brands first come to your mind? (Response 3) </th>
-            <th></th>
-        </tr>
-    </thead>
+    <div class="form-group">
+      <label class="control-label">VAT number* (1234567-8)</label>
+      <input name="vat_number" class="form-control" value="{{attributes.vat_number}}" type="text">
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label">Question*</label>
+      <input name="question" class="form-control" value="{{attributes.question}}" type="text">
+    </div>
+    
+    <div class="form-group">
+      <label class="control-label">qID*</label>
+      <input name="qid" class="form-control" value="{{attributes.qid}}" type="text">
+    </div>
 
-    <tbody>
-        <!-- Listataan datarivit tähän -->
-        <tr>
-            <td><a href="#"> 1234567 </a></td>
-            <td>23.3.2017</td>
-            <td>Asiakasyritys Oy</td>
-            <td>Hp</td>
-            <td>Acer</td>
-            <td>Asus</td>
-            <th><a class="btn btn-default btn-sm" href="#">Edit</a></th>
-        </tr>
-        <tr>
-            <td><a href="#"> 1234567 </a></td>
-            <td>24.3.2017</td>
-            <td>Asiakasyritys Oy</td>
-            <td>Asus</td>
-            <td>Dell</td>
-            <td>Toshiba</td>
-            <th><a class="btn btn-default btn-sm" href="#">Edit</a></th>
-        </tr>
-    </tbody>
-</table>
-    <button class="btn btn-success">Save</button>
-    <button class="btn btn-danger">Cancel</button>
+    <div class="form-group">
+      <label class="control-label">Answer*</label>
+      <input name="answer" class="form-control" value="{{attributes.answer}}" type="text">
+    </div>
+    
+    <p>*required fields</p>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+  </form>
+  
 {% endblock %}

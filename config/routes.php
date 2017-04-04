@@ -22,12 +22,16 @@ $routes->get('/query', function() {
     MainController::query();
 });
 
-$routes->get('/edit', function() {
-    MainController::edit();
+$routes->get('/edit/:id', function($id) {
+    DataController::edit($id);
 });
 
-$routes->get('/remove', function() {
-    MainController::remove();
+$routes->post('/update/:id', function($id) {
+    DataController::update($id);
+});
+
+$routes->post('/remove/:id', function($id) {
+    DataController::remove($id);
 });
 
 $routes->get('/add', function() {

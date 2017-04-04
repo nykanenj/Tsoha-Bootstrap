@@ -9,9 +9,38 @@ class QuestionDataModel extends BaseModel {
         $this->validators = array('validate_questionnaire_name', 'validate_project_start', 'validate_customer_company', 'validate_vat_number', 'validate_qid', 'validate_question', 'validate_answer', ); //Add more with a comma
     }
     
+    public function getAttributes() {
+		
+		$attributes = array('questionnaire_name' => $this->questionnaire_name, 
+		                    'project_start' => $this->project_start, 
+							'customer_company' => $this->customer_company, 
+							'vat_number' => $this->vat_number, 
+							'question' => $this->question, 
+							'qid' => $this->qid, 
+							'answer' => $this->answer);
+        
+        return $attributes;
+		
+	}
+    
     public function save(){
 		$query = DB::connection()->prepare('INSERT INTO questiondata (questionnaire_name, project_start, customer_company, vat_number, question, qid, answer) VALUES (:questionnaire_name, :project_start, :customer_company, :vat_number, :question, :qid, :answer) RETURNING questiondata_id');
-		$query->execute(array('questionnaire_name' => $this->questionnaire_name, 'project_start' => $this->project_start, 'customer_company' => $this->customer_company, 'vat_number' => $this->vat_number, 'question' => $this->question, 'qid' => $this->qid, 'answer' => $this->answer));
+		$query->execute(array('questionnaire_name' => $this->questionnaire_name, 
+		                      'project_start' => $this->project_start, 
+							  'customer_company' => $this->customer_company, 
+							  'vat_number' => $this->vat_number, 
+							  'question' => $this->question, 
+							  'qid' => $this->qid, 
+							  'answer' => $this->answer));
+		
+		$row = $query->fetch();
+		$this->questiondata_id = $row['questiondata_id'];
+	
+	}
+	
+	public function update($id){
+		$query = DB::connection()->prepare('UPDATE questiondata SET questionnaire_name = :questionnaire_name, project_start = :project_start, customer_company = :customer_company, vat_number = :vat_number, question = :question, qid = :qid, answer = :answer WHERE questiondata_id = :questiondata_id');
+		$query->execute(array('questionnaire_name' => $this->questionnaire_name, 'project_start' => $this->project_start, 'customer_company' => $this->customer_company, 'vat_number' => $this->vat_number, 'question' => $this->question, 'qid' => $this->qid, 'answer' => $this->answer, 'questiondata_id' => $id));
 		
 		$row = $query->fetch();
 		$this->questiondata_id = $row['questiondata_id'];
@@ -26,7 +55,7 @@ class QuestionDataModel extends BaseModel {
         $data = array();
 
         foreach ($rows as $row) {
-            $data[] = new Datacruncher(array(
+            $data[] = new QuestionDataModel(array(
                 'questiondata_id' => $row['questiondata_id'],
                 'project_start' => $row['project_start'],
                 'questionnaire_name' => $row['questionnaire_name'],
@@ -49,7 +78,7 @@ class QuestionDataModel extends BaseModel {
         $data = array();
 
         foreach ($rows as $row) {
-            $data[] = new Datacruncher(array(
+            $data[] = new QuestionDataModel(array(
                 'questiondata_id' => $row['questiondata_id'],
                 'project_start' => $row['project_start'],
                 'questionnaire_name' => $row['questionnaire_name'],
@@ -73,7 +102,7 @@ class QuestionDataModel extends BaseModel {
         $data = array();
 
         foreach ($rows as $row) {
-            $data[] = new Datacruncher(array(
+            $data[] = new QuestionDataModel(array(
                 'questiondata_id' => $row['questiondata_id'],
                 'project_start' => $row['project_start'],
                 'questionnaire_name' => $row['questionnaire_name'],
@@ -89,6 +118,30 @@ class QuestionDataModel extends BaseModel {
 
         return null;
     }
+    
+    
+    //Under construction
+    public static function findAttributesByQuestionDataID($id) {
+
+        $query = DB::connection()->prepare('SELECT * FROM questiondata WHERE questiondata_id = :questiondata_id');
+        $query->execute(array('questiondata_id' => $id));
+        $row = $query->fetchAll();
+        
+  //      $attributes = array(
+    //            'project_start' => $row['project_start'],
+      //          'questionnaire_name' => $row['questionnaire_name'],
+        //        'customer_company' => $row['customer_company'],
+          //      'vat_number' => $row['vat_number'],
+            //    'question' => $row['question'],
+              //  'qid' => $row['qid'],
+                //'answer' => $row['answer']
+				//);
+
+		return $row;
+        
+    }
+     
+    //Validators below
     
     public function validate_questionnaire_name(){
     
