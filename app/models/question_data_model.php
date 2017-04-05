@@ -40,11 +40,22 @@ class QuestionDataModel extends BaseModel {
 	
 	public function update($id){
 		$query = DB::connection()->prepare('UPDATE questiondata SET questionnaire_name = :questionnaire_name, project_start = :project_start, customer_company = :customer_company, vat_number = :vat_number, question = :question, qid = :qid, answer = :answer WHERE questiondata_id = :questiondata_id');
-		$query->execute(array('questionnaire_name' => $this->questionnaire_name, 'project_start' => $this->project_start, 'customer_company' => $this->customer_company, 'vat_number' => $this->vat_number, 'question' => $this->question, 'qid' => $this->qid, 'answer' => $this->answer, 'questiondata_id' => $id));
-		
-		$row = $query->fetch();
-		$this->questiondata_id = $row['questiondata_id'];
+		$query->execute(array('questionnaire_name' => $this->questionnaire_name, 
+							  'project_start' => $this->project_start, 
+							  'customer_company' => $this->customer_company, 
+							  'vat_number' => $this->vat_number, 
+							  'question' => $this->question, 
+							  'qid' => $this->qid, 
+							  'answer' => $this->answer, 
+							  'questiondata_id' => $id
+							  ));
+		$query->fetch();
+	}
 	
+	public function remove(){
+		$query = DB::connection()->prepare('DELETE FROM questiondata WHERE questiondata_id = :questiondata_id');
+		$query->execute(array('questiondata_id' => $this->questiondata_id));
+		$query->fetch();
 	}
 
     public static function getAllData() {
@@ -152,9 +163,9 @@ class QuestionDataModel extends BaseModel {
     public function validate_project_start(){
     
     	$errors = array();
-    	$datepattern = '/^((0?[1-9])|([1-2][0-9])|(3[0-1]))-' . 
+    	$datepattern = '/^((19|20)?\d\d)-' . 
     	               '((0?[1-9])|(1[0-2]))-' .
-    	               '((19|20)?\d\d)$/i';
+    	               '((0?[1-9])|([1-2][0-9])|(3[0-1]))$/i';
     
     	if (preg_match($datepattern, $this->project_start) == 0) {
     	

@@ -43,14 +43,18 @@ class DataController extends BaseController {
          
     }
     
-    //Under construction
+    public static function editoverview(){
+        $data = QuestionDataModel::getAllData();
+        View::make('questionnairewebpages/editoverview.html', array('data' => $data));
+    }
+    
     public static function edit($id) {
 	
 		$attributes = QuestionDataModel::findAttributesByQuestionDataID($id);
 		
 		//Kint::dump($datarow);
 		//$attributes = $datarow->getAttributes();
-		Kint::dump($attributes);
+		//Kint::dump($attributes);
 		
 		View::make('questionnairewebpages/edit.html', array('attributes' => $attributes[0]));
 
@@ -75,7 +79,7 @@ class DataController extends BaseController {
         
         if(count($errors) == 0){
         
-        	$datarow->update();
+        	$datarow->update($id);
         	Redirect::to('/overview', array('message' => 'Data added to database!'));
         	
         } else {
@@ -83,6 +87,20 @@ class DataController extends BaseController {
         	View::make('questionnairewebpages/add.html', array('errors' => $errors, 'attributes' => $attributes));
         
         }
+	}
+	
+	public static function removeoverview(){
+		$data = QuestionDataModel::getAllData();
+        View::make('questionnairewebpages/removeoverview.html', array('data' => $data));
+	}
+	
+	public static function remove($id) {
+	
+		$datarow = new QuestionDataModel(array('questiondata_id' => $id));
+		$datarow -> remove();
+		
+		Redirect::to('/overview', array('message' => 'Rivi poistettu onnistuneesti!'));
+		
 	}
 }
 

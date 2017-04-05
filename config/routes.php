@@ -22,6 +22,10 @@ $routes->get('/query', function() {
     MainController::query();
 });
 
+$routes->get('/editoverview', function() {
+    DataController::editoverview();
+});
+
 $routes->get('/edit/:id', function($id) {
     DataController::edit($id);
 });
@@ -30,7 +34,12 @@ $routes->post('/update/:id', function($id) {
     DataController::update($id);
 });
 
+$routes->get('/removeoverview', function() {
+    DataController::removeoverview();
+});
+
 $routes->post('/remove/:id', function($id) {
+	Kint::dump($id);
     DataController::remove($id);
 });
 
