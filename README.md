@@ -8,8 +8,8 @@ Yleisiä linkkejä:
 ## Login tiedot
 
 Sovellukseen pääsee kirjautumaan sisään seuraavilla tiedoilla
-Käyttäjä: admin
-Salasana: admin
+* Käyttäjä: admin
+* Salasana: admin
 
 ## Työn aihe
 
