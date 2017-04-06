@@ -15,8 +15,6 @@
 
     public static function check_logged_in(){
 		
-		Kint::dump($_SESSION);
-		
 		if(isset($_SESSION['user'])){
 			
 		} else {
