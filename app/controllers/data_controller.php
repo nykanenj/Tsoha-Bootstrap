@@ -3,11 +3,13 @@
 class DataController extends BaseController {
     
     public static function overview(){
+		self::check_logged_in();
         $data = QuestionDataModel::getAllData();
         View::make('questionnairewebpages/overview.html', array('data' => $data));
     }
     
     public static function show($questionnaire_name){
+		self::check_logged_in();
         $data = QuestionDataModel::findQuestionnaire($questionnaire_name);
         View::make('questionnairewebpages/overview.html', array('data' => $data));
     }
@@ -44,6 +46,7 @@ class DataController extends BaseController {
     }
     
     public static function editoverview(){
+		self::check_logged_in();
         $data = QuestionDataModel::getAllData();
         View::make('questionnairewebpages/editoverview.html', array('data' => $data));
     }
@@ -90,6 +93,7 @@ class DataController extends BaseController {
 	}
 	
 	public static function removeoverview(){
+		self::check_logged_in();
 		$data = QuestionDataModel::getAllData();
         View::make('questionnairewebpages/removeoverview.html', array('data' => $data));
 	}

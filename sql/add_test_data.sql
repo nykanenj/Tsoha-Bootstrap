@@ -1,6 +1,6 @@
-INSERT INTO usertable (user_name, password) VALUES ('Testikäyttäjä', 'Testisala');
-INSERT INTO usertable (user_name, password) VALUES ('Matti Nykänen', 'Mäkikotka');
-
+INSERT INTO usertable (username, password, adminrights) VALUES ('Testikäyttäjä', 'Testisala', 0);
+INSERT INTO usertable (username, password, adminrights) VALUES ('Matti Nykänen', 'Mäkikotka', 0);
+INSERT INTO usertable (username, password, adminrights) VALUES ('admin', 'admin', 1);
 
 INSERT INTO questiondata (project_start, 
     questionnaire_name,
@@ -49,7 +49,7 @@ INSERT INTO questiondata (project_start,
     customer_company,
     vat_number,
     question,
-    qid,bash
+    qid,
     answer) VALUES ('01.03.2017', 
     'Kevään_bränditutkimus_Sente',
     'Sente Academy',
@@ -86,10 +86,47 @@ INSERT INTO questiondata (project_start,
     'tunnettuus',
     'Kyllä');
 
+INSERT INTO questiondata (project_start, 
+    questionnaire_name,
+    customer_company,
+    vat_number,
+    question,
+    qid,
+    answer) VALUES ('06.04.2017', 
+    'Formulakysely',
+    'Ferrari',
+    '9999999-8',
+    'Mikä talli voittaa mestaruuden tänävuonna?',
+    'voittaa',
+    'McLaren');
 
+INSERT INTO questiondata (project_start, 
+    questionnaire_name,
+    customer_company,
+    vat_number,
+    question,
+    qid,
+    answer) VALUES ('06.04.2017', 
+    'Formulakysely',
+    'Ferrari',
+    '9999999-8',
+    'Mikä talli voittaa mestaruuden tänävuonna?',
+    'voittaa',
+    'Ferrari');
 
-
-
+INSERT INTO questiondata (project_start, 
+    questionnaire_name,
+    customer_company,
+    vat_number,
+    question,
+    qid,
+    answer) VALUES ('06.04.2017', 
+    'Formulakysely',
+    'Ferrari',
+    '9999999-8',
+    'Mikä talli voittaa mestaruuden tänävuonna?',
+    'voittaa',
+    'Renault');
 
 
 

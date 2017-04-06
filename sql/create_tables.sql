@@ -1,7 +1,8 @@
 CREATE TABLE usertable(
   user_id SERIAL PRIMARY KEY, -- SERIAL tyyppinen pääavain pitää huolen, että tauluun lisätyllä rivillä on aina uniikki pääavain. Kätevää!
-  user_name varchar(30) NOT NULL, -- Muista erottaa sarakkeiden määrittelyt pilkulla!
-  password varchar(30) NOT NULL
+  username varchar(30) NOT NULL, -- Muista erottaa sarakkeiden määrittelyt pilkulla!
+  password varchar(30) NOT NULL,
+  adminrights integer NOT NULL 
 );
 
 CREATE TABLE questiondata(

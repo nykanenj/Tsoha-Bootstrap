@@ -7,7 +7,11 @@ $routes->get('/', function() {
 });
 
 $routes->get('/login', function() {
-    MainController::login();
+    UserController::login();
+});
+
+$routes->post('/login', function() {
+    UserController::handle_login();
 });
 
 $routes->get('/test.html', function() {

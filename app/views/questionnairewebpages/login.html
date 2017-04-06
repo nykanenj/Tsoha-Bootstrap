@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<form>
-    <!-- Tekstikenttä käyttäjätunnukselle -->
+<h1>Login</h1>
+
+<form method="post" action="{{base_path}}/login">
     <div class="form-group">
         <label>User</label>
-        <input type="text" class="form-control">
+        <input class="form-control" name="username" value="{{username}}" type="text">
     </div>
-
-    <!-- Salasanakenttä salasanalle -->
     <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control">
+        <input class="form-control" name="password" type="password" >
     </div>
 
     <button type="submit" class="btn btn-primary">Login</button>
