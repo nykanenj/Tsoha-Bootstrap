@@ -14,6 +14,11 @@ $routes->post('/login', function() {
     UserController::handle_login();
 });
 
+$routes->post('/logout', function() {
+	UserController::logout();
+	
+});
+
 $routes->get('/test.html', function() {
     MainController::login();
 });

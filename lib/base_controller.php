@@ -15,7 +15,7 @@
 
     public static function check_logged_in(){
 		
-		if(isset($_SESSION['user'])){
+		if(isset($_SESSION['user'])){	
 			
 		} else {
 			View::make('questionnairewebpages/login.html', array('message' => 'Please login first!'));
