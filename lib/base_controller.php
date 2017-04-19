@@ -15,11 +15,16 @@
 
     public static function check_logged_in(){
 		
-		if(isset($_SESSION['user'])){	
-			
-		} else {
+		if(!isset($_SESSION['user'])){	
 			View::make('questionnairewebpages/login.html', array('message' => 'Please login first!'));
 		}
+    }
+    
+    public static function user_logged_in(){
+		
+		return (isset($_SESSION['user']) != null);
+			
+		
     }
 
   }

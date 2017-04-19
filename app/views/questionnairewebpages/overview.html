@@ -7,6 +7,7 @@
         <tr>
             <th>ID</th>
             <th>Date</th>
+            <th>Questionnaire ID</th>
             <th>Questionnaire Name</th>
             <th>Company</th>
             <th>VAT number</th>
@@ -21,9 +22,10 @@
         {% for row in data %}
             <tr>
               <!-- <td><a href="{{base_path}}/questionnairewebpages/{{data.questiondata_id}}> {{data.questiondata_id}}</td> -->
-              <td>{{row.questiondata_id}}</td>
+              <td>{{row.questions_answers_id}}</td>
               <td>{{row.project_start}}</td>
-              <td><a href="{{base_path}}/query/{{row.questionnaire_name}}">{{row.questionnaire_name}}</a></td>
+              <td><a href="{{base_path}}/query/{{row.questionnaire_id}}">{{row.questionnaire_id}}</a></td>
+              <td>{{row.questionnaire_name}}</a></td>
               <td>{{row.customer_company}}</td>
               <td>{{row.vat_number}}</td>
               <td>{{row.qid}}</td>

@@ -16,7 +16,6 @@ $routes->post('/login', function() {
 
 $routes->post('/logout', function() {
 	UserController::logout();
-	
 });
 
 $routes->get('/test.html', function() {
