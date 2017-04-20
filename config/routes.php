@@ -34,12 +34,20 @@ $routes->get('/query', function() {
     MainController::query();
 });
 
-$routes->get('/insertoverview', function() {
-    MainController::insertoverview();
+$routes->get('/insertoverview1', function() {
+    MainController::insertoverview1();
 });
 
-$routes->post('/insertdata', function() {
-    MainController::insertdata();
+$routes->get('/insertoverview2', function() {
+    MainController::insertoverview2();
+});
+
+$routes->post('/insertquestionnaire', function() {
+    MainController::insertquestionnaire();
+});
+
+$routes->post('/insertquestionsanswers', function() {
+    MainController::insertquestionsanswers();
 });
 
 $routes->get('/editoverview', function() {

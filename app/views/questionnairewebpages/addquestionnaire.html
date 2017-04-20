@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Add questionnairedata to database</h1>
+  <h1>Add questionnaire to database</h1>
   
   {% if errors %}
     <div class="alert alert-danger">
@@ -13,7 +13,7 @@
   {% endif %}
 
 
-  <form method="post" action="{{base_path}}/insertdata">
+  <form method="post" action="{{base_path}}/insertquestionnaire">
     <div class="form-group">
       <label class="control-label">Questionnaire name*</label>
       <input name="questionnaire_name" class="form-control" value="{{attributes.questionnaire_name}}" type="text">
@@ -32,21 +32,6 @@
     <div class="form-group">
       <label class="control-label">VAT number* (1234567-8)</label>
       <input name="vat_number" class="form-control" value="{{attributes.vat_number}}" type="text">
-    </div>
-    
-    <div class="form-group">
-      <label class="control-label">Question*</label>
-      <input name="question" class="form-control" value="{{attributes.question}}" type="text">
-    </div>
-    
-    <div class="form-group">
-      <label class="control-label">qID*</label>
-      <input name="qid" class="form-control" value="{{attributes.qid}}" type="text">
-    </div>
-
-    <div class="form-group">
-      <label class="control-label">Answer*</label>
-      <input name="answer" class="form-control" value="{{attributes.answer}}" type="text">
     </div>
     
     <p>*required fields</p>

@@ -17,6 +17,10 @@ class MainController extends BaseController {
     public static function show($questionnaire_id) {
         self::check_logged_in();
         $data = QuestionDataModel::findQuestionnaire($questionnaire_id);
+        if (empty($data)) {
+            $data = QuestionDataModel::getAllQuestionnaires();
+            View::make('questionnairewebpages/questionnaires.html', array('data' => $data, 'error' => 'No data to show for this questionnaire!'));
+        }
         View::make('questionnairewebpages/overview.html', array('data' => $data, 'title' => $data[1]->questionnaire_name));
     }
 
@@ -25,12 +29,17 @@ class MainController extends BaseController {
         View::make('questionnairewebpages/query.html');
     }
 
-    public static function insertoverview() {
+    public static function insertoverview1() {
         self::check_logged_in();
-        View::make('questionnairewebpages/add.html');
+        View::make('questionnairewebpages/addquestionnaire.html');
+    }
+    
+    public static function insertoverview2() {
+        self::check_logged_in();
+        View::make('questionnairewebpages/addquestionsanswers.html');
     }
 
-    public static function insertdata() {
+    public static function insertquestionnaire() {
         self::check_logged_in();
 
         $params = $_POST;
@@ -38,21 +47,41 @@ class MainController extends BaseController {
             'questionnaire_name' => $params['questionnaire_name'],
             'project_start' => $params['project_start'],
             'customer_company' => $params['customer_company'],
-            'vat_number' => $params['vat_number'],
+            'vat_number' => $params['vat_number']
+        );
+
+        $newquestionnaire = new QuestionnaireModel($attributes);
+        $errors = $newquestionnaire->errors();
+
+        if (count($errors) == 0) {
+            $newquestionnaire->savequestionnaire();
+            Redirect::to('/overview', array('message' => 'Data added to database!'));
+            
+        } else {
+            View::make('questionnairewebpages/addquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
+    }
+    
+       public static function insertquestionsanswers() {
+        self::check_logged_in();
+
+        $params = $_POST;
+        $attributes = array(
+            'questionnaire_id' => $params['questionnaire_id'],
             'question' => $params['question'],
             'qid' => $params['qid'],
             'answer' => $params['answer']
         );
 
-        $datarow = new QuestionDataModel($attributes);
-        $errors = $datarow->errors();
+        $newquestionanswers = new QuestionsAnswersModel($attributes);
+        $errors = $newquestionanswers->errors();
 
         if (count($errors) == 0) {
-            $datarow->save();
+            $newquestionanswers->savequestions_answers();
             Redirect::to('/overview', array('message' => 'Data added to database!'));
             
         } else {
-            View::make('questionnairewebpages/add.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('questionnairewebpages/addquestionsanswers.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
