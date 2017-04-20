@@ -1,19 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{title}}</h1>
+<h1>Questionnaires</h1>
 
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Date</th>
             <th>Questionnaire ID</th>
             <th>Questionnaire Name</th>
+            <th>Date</th>
             <th>Company</th>
             <th>VAT number</th>
-            <th>qID</th>
-            <th>Question</th>
-            <th>Answer</th>
         </tr>
     </thead>
 
@@ -21,16 +17,11 @@
         <!-- Listataan rivit taulukkoon tässä loopissa -->
         {% for row in data %}
             <tr>
-              <!-- <td><a href="{{base_path}}/questionnairewebpages/{{data.questiondata_id}}> {{data.questiondata_id}}</td> -->
-              <td>{{row.questions_answers_id}}</td>
-              <td>{{row.project_start}}</td>
-              <td>{{row.questionnaire_id}}</td>
+              <td><a href="{{base_path}}/overview/{{row.questionnaire_id}}">{{row.questionnaire_id}}</a></td>
               <td>{{row.questionnaire_name}}</a></td>
+              <td>{{row.project_start}}</td>
               <td>{{row.customer_company}}</td>
               <td>{{row.vat_number}}</td>
-              <td>{{row.qid}}</td>
-              <td>{{row.question}}</td>
-              <td>{{row.answer}}</td>
             </tr>
         {% endfor %}
     </tbody>

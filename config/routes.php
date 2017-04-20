@@ -19,46 +19,48 @@ $routes->post('/logout', function() {
 });
 
 $routes->get('/overview', function() {
-    DataController::overview();
+    MainController::overview();
+});
+
+$routes->get('/questionnaires', function() {
+    MainController::questionnaires();
+});
+
+$routes->get('/overview/:questionnaire_id', function($questionnaire_id) {
+    MainController::show($questionnaire_id);
 });
 
 $routes->get('/query', function() {
     MainController::query();
 });
 
-$routes->get('/editoverview', function() {
-    DataController::editoverview();
-});
-
-$routes->get('/edit/:id', function($id) {
-    DataController::edit($id);
-});
-
-$routes->post('/update/:id', function($id) {
-    DataController::update($id);
-});
-
-$routes->get('/removeoverview', function() {
-    DataController::removeoverview();
-});
-
-$routes->post('/remove/:id', function($id) {
-    Kint::dump($id);
-    DataController::remove($id);
-});
-
-$routes->get('/add', function() {
-    MainController::add();
+$routes->get('/insertoverview', function() {
+    MainController::insertoverview();
 });
 
 $routes->post('/insertdata', function() {
-    DataController::insertdata();
+    MainController::insertdata();
 });
 
-$routes->get('/query/:questionnaire_name', function($questionnaire_name) {
-    DataController::show($questionnaire_name);
+$routes->get('/editoverview', function() {
+    MainController::editoverview();
 });
 
+$routes->get('/edit/:id', function($id) {
+    MainController::edit($id);
+});
+
+$routes->post('/update/:id', function($id) {
+    MainController::update($id);
+});
+
+$routes->get('/removeoverview', function() {
+    MainController::removeoverview();
+});
+
+$routes->post('/remove/:id', function($id) {
+    MainController::remove($id);
+});
 
 $routes->get('/sandbox', function() {
     MainController::sandbox();

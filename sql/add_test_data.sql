@@ -9,7 +9,7 @@ INSERT INTO questionnaire (
     customer_company,
     vat_number) VALUES (
     '28.03.2017', 
-    'Mummonpullat_pilottikysely',
+    'Mummonpullat pilottikysely',
     'Mummonpullat Oy',
     '1234567-8');
 
@@ -19,7 +19,7 @@ INSERT INTO questionnaire (
     customer_company,
     vat_number) VALUES (
     '01.03.2017', 
-    'Kevään_bränditutkimus_Sente',
+    'Kevään bränditutkimus Sente',
     'Sente Academy',
     '2663047-3');
     
