@@ -3,6 +3,7 @@
 class UserController extends BaseController {
 	
 	public static function login(){
+		
 		View::make('questionnairewebpages/login.html');
 	}
 	
@@ -17,8 +18,8 @@ class UserController extends BaseController {
 					
 			}else{
 				
-				$_SESSION['user'] = $user->user_id;
-				
+				$_SESSION['user_id'] = $user->user_id;
+				$_SESSION['username'] = $user->username;
 				Redirect::to('/overview', array('message' => 'Tervetuloa takaisin ' . $user->username));
 			
 			}
@@ -26,7 +27,7 @@ class UserController extends BaseController {
 	
 	public static function logout(){
 	
-		$_SESSION['user'] = null;
+		$_SESSION['username'] = null;
 		Redirect::to('/login', array('message' => 'Logout successful!'));
 		
 		

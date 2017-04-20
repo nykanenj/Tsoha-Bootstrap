@@ -40,7 +40,7 @@ class DataController extends BaseController {
         	
         } else {
         
-			Kint::dump($attributes);	
+			
         	View::make('questionnairewebpages/add.html', array('errors' => $errors, 'attributes' => $attributes));
         
         }

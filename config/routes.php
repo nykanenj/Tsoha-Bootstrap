@@ -3,7 +3,7 @@
 //The first route that gives a match will be used.
 
 $routes->get('/', function() {
-    MainController::login();
+    UserController::login();
 });
 
 $routes->get('/login', function() {
@@ -15,11 +15,7 @@ $routes->post('/login', function() {
 });
 
 $routes->post('/logout', function() {
-	UserController::logout();
-});
-
-$routes->get('/test.html', function() {
-    MainController::login();
+    UserController::logout();
 });
 
 $routes->get('/overview', function() {
@@ -47,7 +43,7 @@ $routes->get('/removeoverview', function() {
 });
 
 $routes->post('/remove/:id', function($id) {
-	Kint::dump($id);
+    Kint::dump($id);
     DataController::remove($id);
 });
 
