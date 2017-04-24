@@ -30,9 +30,12 @@ class QuestionDataModel extends BaseModel {
         $query->fetch();
     }
 
-    public function remove() {
-        $query = DB::connection()->prepare('DELETE FROM questions_answers WHERE questions_answers_id = :questions_answers_id');
-        $query->execute(array('questions_answers_id' => $this->questions_answers_id));
+    public function removequestionnaire() {
+        $query = DB::connection()->prepare('DELETE FROM questions_answers WHERE questionnaire_id = :questionnaire_id');
+        $query->execute(array('questionnaire_id' => $this->questionnaire_id));
+        $query->fetch();
+        $query = DB::connection()->prepare('DELETE FROM questionnaire WHERE questionnaire_id = :questionnaire_id');
+        $query->execute(array('questionnaire_id' => $this->questionnaire_id));
         $query->fetch();
     }
 

@@ -2,7 +2,7 @@
 
 class QuestionsAnswersModel extends BaseModel {
 
-    public $questionnaire_id, $question, $qid, $answer, $validators;
+    public $questions_answers_id, $questionnaire_id, $question, $qid, $answer, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -18,6 +18,12 @@ class QuestionsAnswersModel extends BaseModel {
 
         $row = $query->fetch();
         $this->questions_answers_id = $row['questions_answers_id'];
+    }
+    
+    public function removeanswer() {
+        $query = DB::connection()->prepare('DELETE FROM questions_answers WHERE questions_answers_id = :questions_answers_id');
+        $query->execute(array('questions_answers_id' => $this->questions_answers_id));
+        $query->fetch();
     }
 
     //Validators below

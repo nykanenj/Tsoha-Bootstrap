@@ -7,7 +7,7 @@ class MainController extends BaseController {
         $data = QuestionDataModel::getAllData();
         View::make('questionnairewebpages/overview.html', array('data' => $data, 'title' => ' Overview af all data'));
     }
-    
+
     public static function questionnaires() {
         self::check_logged_in();
         $data = QuestionDataModel::getAllQuestionnaires();
@@ -21,7 +21,8 @@ class MainController extends BaseController {
             $data = QuestionDataModel::getAllQuestionnaires();
             View::make('questionnairewebpages/questionnaires.html', array('data' => $data, 'error' => 'No data to show for this questionnaire!'));
         }
-        View::make('questionnairewebpages/overview.html', array('data' => $data, 'title' => $data[1]->questionnaire_name));
+        $title = $data[0]->questionnaire_name;
+        View::make('questionnairewebpages/overview.html', array('data' => $data, 'title' => $title));
     }
 
     public static function query() {
@@ -33,7 +34,7 @@ class MainController extends BaseController {
         self::check_logged_in();
         View::make('questionnairewebpages/addquestionnaire.html');
     }
-    
+
     public static function insertoverview2() {
         self::check_logged_in();
         View::make('questionnairewebpages/addquestionsanswers.html');
@@ -56,13 +57,12 @@ class MainController extends BaseController {
         if (count($errors) == 0) {
             $newquestionnaire->savequestionnaire();
             Redirect::to('/overview', array('message' => 'Data added to database!'));
-            
         } else {
             View::make('questionnairewebpages/addquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
-    
-       public static function insertquestionsanswers() {
+
+    public static function insertquestionsanswers() {
         self::check_logged_in();
 
         $params = $_POST;
@@ -79,16 +79,15 @@ class MainController extends BaseController {
         if (count($errors) == 0) {
             $newquestionanswers->savequestions_answers();
             Redirect::to('/overview', array('message' => 'Data added to database!'));
-            
         } else {
             View::make('questionnairewebpages/addquestionsanswers.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
-    public static function editoverview() {
+    public static function viewedit() {
         self::check_logged_in();
         $data = QuestionDataModel::getAllData();
-        View::make('questionnairewebpages/editoverview.html', array('data' => $data));
+        View::make('questionnairewebpages/viewedit.html', array('data' => $data));
     }
 
     public static function edit($id) {
@@ -123,18 +122,38 @@ class MainController extends BaseController {
         }
     }
 
-    public static function removeoverview() {
+    public static function viewremovequestionnaire() {
         self::check_logged_in();
-        $data = QuestionDataModel::getAllData();
-        View::make('questionnairewebpages/removeoverview.html', array('data' => $data));
+        $data = QuestionDataModel::getAllQuestionnaires();
+        $headings = array('Questionnaire ID', 'Questionnaire Name', 'Date', 'Company', 'VAT number', 'Remove');
+        View::make('questionnairewebpages/viewremovequestionnaire.html', array('data' => $data, 'headings' => $headings));
     }
 
-    public static function remove($id) {
+    public static function removequestionnaire($id) {
         self::check_logged_in();
-        $datarow = new QuestionDataModel(array('questiondata_id' => $id));
-        $datarow->remove();
+        $datarow = new QuestionDataModel(array('questionnaire_id' => $id));
+        $datarow->removequestionnaire();
 
-        Redirect::to('/overview', array('message' => 'Rivi poistettu onnistuneesti!'));
+        Redirect::to('/viewremovequestionnaire', array('message' => 'Questionnaire removed!'));
+    }
+
+    public static function viewremoveanswer($questionnaire_id) {
+        self::check_logged_in();
+        $data = QuestionDataModel::findQuestionnaire($questionnaire_id);
+        if (empty($data)) {
+            $data = QuestionDataModel::getAllQuestionnaires();
+            View::make('questionnairewebpages/viewremovequestionnaire.html', array('data' => $data, 'error' => 'No data to show for this questionnaire!'));
+        }
+        $title = $data[0]->questionnaire_name;
+        View::make('questionnairewebpages/viewremoveanswer.html', array('data' => $data, 'title' => $title));
+    }
+
+    public static function removeanswer($id) {
+        self::check_logged_in();
+        $datarow = new QuestionsAnswersModel(array('questions_answers_id' => $id));
+        $datarow->removeanswer();
+
+        Redirect::to('/viewremovequestionnaire', array('message' => 'Row removed!'));
     }
 
     public static function sandbox() {

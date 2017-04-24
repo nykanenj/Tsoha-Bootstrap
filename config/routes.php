@@ -50,8 +50,8 @@ $routes->post('/insertquestionsanswers', function() {
     MainController::insertquestionsanswers();
 });
 
-$routes->get('/editoverview', function() {
-    MainController::editoverview();
+$routes->get('/viewedit', function() {
+    MainController::viewedit();
 });
 
 $routes->get('/edit/:id', function($id) {
@@ -62,12 +62,20 @@ $routes->post('/update/:id', function($id) {
     MainController::update($id);
 });
 
-$routes->get('/removeoverview', function() {
-    MainController::removeoverview();
+$routes->get('/viewremovequestionnaire', function() {
+    MainController::viewremovequestionnaire();
 });
 
-$routes->post('/remove/:id', function($id) {
-    MainController::remove($id);
+$routes->post('/removequestionnaire/:id', function($id) {
+    MainController::removequestionnaire($id);
+});
+
+$routes->get('/viewremoveanswer/:questionnaire_id', function($questionnaire_id) {
+    MainController::viewremoveanswer($questionnaire_id);
+});
+
+$routes->post('/removeanswer/:id', function($id) {
+    MainController::removeanswer($id);
 });
 
 $routes->get('/sandbox', function() {
