@@ -6,7 +6,7 @@ class QuestionnaireModel extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_questionnaire_name', 'validate_project_start', 'validate_customer_company', 'validate_vat_number'); //Add more with a comma
+        $this->validators = array('validate_questionnaire_id',  'validate_questionnaire_name', 'validate_project_start', 'validate_customer_company', 'validate_vat_number'); //Add more with a comma
     }
 
     public function savequestionnaire() {
@@ -22,7 +22,34 @@ class QuestionnaireModel extends BaseModel {
         $this->questionnaire_id = $row['questionnaire_id'];
     }
 
+    public static function findAttributesByQuestionnaireID($id) {
+
+        $query = DB::connection()->prepare('SELECT * FROM questionnaire WHERE questionnaire_id = :questionnaire_id');
+        $query->execute(array('questionnaire_id' => $id));
+        $row = $query->fetchAll();
+
+        return $row;
+    }
+
+    public function updatequestionnaire($id) {
+        $query = DB::connection()->prepare('UPDATE questionnaire SET project_start = :project_start, questionnaire_name = :questionnaire_name, customer_company = :customer_company, vat_number = :vat_number WHERE questionnaire_id = :questionnaire_id');
+        $query->execute(array('questionnaire_id' => $this->questionnaire_id,
+            'project_start' => $this->project_start,
+            'questionnaire_name' => $this->questionnaire_name,
+            'customer_company' => $this->customer_company,
+            'vat_number' => $this->vat_number,
+            'questionnaire_id' => $id
+        ));
+        $query->fetch();
+    }
+
     //Validators below
+    
+    public function validate_questionnaire_id() {
+        
+        return parent::validate_is_number($this->questionnaire_id, 'Questionnaire ID');
+        
+    }
 
     public function validate_questionnaire_name() {
 

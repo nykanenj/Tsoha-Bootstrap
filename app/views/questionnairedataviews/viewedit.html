@@ -10,23 +10,17 @@
             <th>Questionnaire Name</th>
             <th>Company</th>
             <th>VAT number</th>
-            <th>qID</th>
-            <th>Question</th>
-            <th>Answer</th>
         </tr>
     </thead>
 
     <tbody>
         {% for row in data %}
             <tr>
-              <td><a href="{{base_path}}/edit/{{row.questiondata_id}}">{{row.questiondata_id}}</a></td>
+              <td><a href="{{base_path}}/edit/{{row.questionnaire_id}}">{{row.questionnaire_id}}</a></td>
               <td>{{row.project_start}}</td>
               <td>{{row.questionnaire_name}}</td>
               <td>{{row.customer_company}}</td>
               <td>{{row.vat_number}}</td>
-              <td>{{row.qid}}</td>
-              <td>{{row.question}}</td>
-              <td>{{row.answer}}</td>
             </tr>
         {% endfor %}
     </tbody>

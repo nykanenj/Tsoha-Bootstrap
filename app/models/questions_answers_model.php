@@ -6,7 +6,7 @@ class QuestionsAnswersModel extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('questionnaire_qid', 'validate_qid', 'validate_question', 'validate_answer'); //Add more with a comma
+        $this->validators = array('validate_questionnaire_id', 'validate_qid', 'validate_question', 'validate_answer'); //Add more with a comma
     }
 
     public function savequestions_answers() {
@@ -28,9 +28,10 @@ class QuestionsAnswersModel extends BaseModel {
 
     //Validators below
 
-    public function questionnaire_qid() {
-
-        return parent::validate_string_length($this->questionnaire_id, 1, 10000, 'Questionnaire ID');
+    public function validate_questionnaire_id() {
+        
+        return parent::validate_is_number($this->questionnaire_id, 'Questionnaire ID');
+        
     }
     
     public function validate_qid() {

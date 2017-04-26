@@ -19,7 +19,7 @@ class BaseController {
     public static function check_logged_in() {
 
         if (!isset($_SESSION['username'])) {
-            View::make('questionnairewebpages/login.html', array('message' => 'Please login first!'));
+            View::make('userviews/login.html', array('message' => 'Please login first!'));
         }
     }
 

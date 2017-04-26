@@ -59,6 +59,19 @@
     
     }
     
+    public function validate_is_number($number, $field_name) {
+        
+        $errors = array();
+        
+        if (!is_numeric($number)) {
+            
+            $errors[] = $field_name . ': Has to be a number!';
+            
+        }
+        
+        return $errors;   
+    }
+    
     public function validate_string_not_empty($string, $field_name){
     
 	  $errors = array();

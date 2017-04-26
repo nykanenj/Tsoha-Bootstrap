@@ -5,13 +5,13 @@ class MainController extends BaseController {
     public static function overview() {
         self::check_logged_in();
         $data = QuestionDataModel::getAllData();
-        View::make('questionnairewebpages/overview.html', array('data' => $data, 'title' => ' Overview af all data'));
+        View::make('questionnairedataviews/overview.html', array('data' => $data, 'title' => ' Overview af all data'));
     }
 
     public static function questionnaires() {
         self::check_logged_in();
         $data = QuestionDataModel::getAllQuestionnaires();
-        View::make('questionnairewebpages/questionnaires.html', array('data' => $data));
+        View::make('questionnairedataviews/questionnaires.html', array('data' => $data));
     }
 
     public static function show($questionnaire_id) {
@@ -19,25 +19,25 @@ class MainController extends BaseController {
         $data = QuestionDataModel::findQuestionnaire($questionnaire_id);
         if (empty($data)) {
             $data = QuestionDataModel::getAllQuestionnaires();
-            View::make('questionnairewebpages/questionnaires.html', array('data' => $data, 'error' => 'No data to show for this questionnaire!'));
+            View::make('questionnairedataviews/questionnaires.html', array('data' => $data, 'error' => 'No data to show for this questionnaire!'));
         }
         $title = $data[0]->questionnaire_name;
-        View::make('questionnairewebpages/overview.html', array('data' => $data, 'title' => $title));
+        View::make('questionnairedataviews/overview.html', array('data' => $data, 'title' => $title));
     }
 
     public static function query() {
         self::check_logged_in();
-        View::make('questionnairewebpages/query.html');
+        View::make('questionnairedataviews/query.html');
     }
 
     public static function insertoverview1() {
         self::check_logged_in();
-        View::make('questionnairewebpages/addquestionnaire.html');
+        View::make('questionnairedataviews/addquestionnaire.html');
     }
 
     public static function insertoverview2() {
         self::check_logged_in();
-        View::make('questionnairewebpages/addquestionsanswers.html');
+        View::make('questionnairedataviews/addquestionsanswers.html');
     }
 
     public static function insertquestionnaire() {
@@ -58,7 +58,7 @@ class MainController extends BaseController {
             $newquestionnaire->savequestionnaire();
             Redirect::to('/overview', array('message' => 'Data added to database!'));
         } else {
-            View::make('questionnairewebpages/addquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('questionnairedataviews/addquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
@@ -80,45 +80,43 @@ class MainController extends BaseController {
             $newquestionanswers->savequestions_answers();
             Redirect::to('/overview', array('message' => 'Data added to database!'));
         } else {
-            View::make('questionnairewebpages/addquestionsanswers.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('questionnairedataviews/addquestionsanswers.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
     public static function viewedit() {
         self::check_logged_in();
-        $data = QuestionDataModel::getAllData();
-        View::make('questionnairewebpages/viewedit.html', array('data' => $data));
+        $data = QuestionDataModel::getAllQuestionnaires();
+        View::make('questionnairedataviews/viewedit.html', array('data' => $data));
     }
 
     public static function edit($id) {
         self::check_logged_in();
-        $attributes = QuestionDataModel::findAttributesByQuestionDataID($id);
-        View::make('questionnairewebpages/edit.html', array('attributes' => $attributes[0]));
+        $attributes = QuestionnaireModel::findAttributesByQuestionnaireID($id);
+        View::make('questionnairedataviews/edit.html', array('attributes' => $attributes[0]));
     }
 
-    public static function update($id) {
+    public static function updatequestionnaire($id) {
         self::check_logged_in();
         $params = $_POST;
         $attributes = array(
+            'questionnaire_id' => $id,
             'questionnaire_name' => $params['questionnaire_name'],
             'project_start' => $params['project_start'],
             'customer_company' => $params['customer_company'],
-            'vat_number' => $params['vat_number'],
-            'question' => $params['question'],
-            'qid' => $params['qid'],
-            'answer' => $params['answer']
+            'vat_number' => $params['vat_number']
         );
 
-        $datarow = new QuestionDataModel($attributes);
+        $datarow = new QuestionnaireModel($attributes);
         $errors = $datarow->errors();
 
         if (count($errors) == 0) {
 
-            $datarow->update($id);
-            Redirect::to('/overview', array('message' => 'Data added to database!'));
+            $datarow->updatequestionnaire($id);
+            Redirect::to('/viewedit', array('message' => 'Data edit success!'));
         } else {
 
-            View::make('questionnairewebpages/add.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('questionnairedataviews/add.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
@@ -126,7 +124,7 @@ class MainController extends BaseController {
         self::check_logged_in();
         $data = QuestionDataModel::getAllQuestionnaires();
         $headings = array('Questionnaire ID', 'Questionnaire Name', 'Date', 'Company', 'VAT number', 'Remove');
-        View::make('questionnairewebpages/viewremovequestionnaire.html', array('data' => $data, 'headings' => $headings));
+        View::make('questionnairedataviews/viewremovequestionnaire.html', array('data' => $data, 'headings' => $headings));
     }
 
     public static function removequestionnaire($id) {
@@ -142,10 +140,10 @@ class MainController extends BaseController {
         $data = QuestionDataModel::findQuestionnaire($questionnaire_id);
         if (empty($data)) {
             $data = QuestionDataModel::getAllQuestionnaires();
-            View::make('questionnairewebpages/viewremovequestionnaire.html', array('data' => $data, 'error' => 'No data to show for this questionnaire!'));
+            View::make('questionnairedataviews/viewremovequestionnaire.html', array('data' => $data, 'error' => 'No data to show for this questionnaire!'));
         }
         $title = $data[0]->questionnaire_name;
-        View::make('questionnairewebpages/viewremoveanswer.html', array('data' => $data, 'title' => $title));
+        View::make('questionnairedataviews/viewremoveanswer.html', array('data' => $data, 'title' => $title));
     }
 
     public static function removeanswer($id) {
@@ -155,19 +153,4 @@ class MainController extends BaseController {
 
         Redirect::to('/viewremovequestionnaire', array('message' => 'Row removed!'));
     }
-
-    public static function sandbox() {
-        self::check_logged_in();
-        // Testaa koodiasi täällä
-        $hedelmatehdas = new QuestionDataModel(array(
-            'questionnaire_name' => '',
-            'project_start' => '1.4.2017',
-            'vat_number' => '0987654-3'
-        ));
-
-        $errors = $hedelmatehdas->errors();
-
-        Kint::dump($errors);
-    }
-
 }

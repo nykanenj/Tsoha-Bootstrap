@@ -58,8 +58,8 @@ $routes->get('/edit/:id', function($id) {
     MainController::edit($id);
 });
 
-$routes->post('/update/:id', function($id) {
-    MainController::update($id);
+$routes->post('/updatequestionnaire/:id', function($id) {
+    MainController::updatequestionnaire($id);
 });
 
 $routes->get('/viewremovequestionnaire', function() {
@@ -76,8 +76,4 @@ $routes->get('/viewremoveanswer/:questionnaire_id', function($questionnaire_id) 
 
 $routes->post('/removeanswer/:id', function($id) {
     MainController::removeanswer($id);
-});
-
-$routes->get('/sandbox', function() {
-    MainController::sandbox();
 });
