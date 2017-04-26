@@ -1,9 +1,33 @@
 <?php
 
+/*
+ * UserController controls registering, logging in and logging out
+ */
+
 class UserController extends BaseController {
 
     public static function register() {
-        View::make('userviews/login.html');
+        View::make('userviews/register.html');
+    }
+
+    public static function registernewuser() {
+        $params = $_POST;
+        
+        $attributes = array(
+            'username' => $params['username'],
+            'password' => $params['password'],
+            'adminrights' => 0
+        );
+
+        $newuser = new User($attributes);
+        $errors = $newuser->errors();
+
+        if (count($errors) == 0) {
+            $newuser->save();
+            Redirect::to('/login', array('message' => 'Account created successfully! Please login'));
+        } else {
+            View::make('questionnairedataviews/register.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
     }
 
     public static function login() {

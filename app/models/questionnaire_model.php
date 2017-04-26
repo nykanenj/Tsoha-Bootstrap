@@ -6,7 +6,7 @@ class QuestionnaireModel extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_questionnaire_id',  'validate_questionnaire_name', 'validate_project_start', 'validate_customer_company', 'validate_vat_number'); //Add more with a comma
+        $this->validators = array('validate_questionnaire_name', 'validate_project_start', 'validate_customer_company', 'validate_vat_number'); //Add more with a comma
     }
 
     public function savequestionnaire() {

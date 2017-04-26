@@ -6,6 +6,14 @@ $routes->get('/', function() {
     UserController::login();
 });
 
+$routes->get('/register', function() {
+    UserController::register();
+});
+
+$routes->post('/register', function() {
+    UserController::registernewuser();
+});
+
 $routes->get('/login', function() {
     UserController::login();
 });
@@ -19,61 +27,61 @@ $routes->post('/logout', function() {
 });
 
 $routes->get('/overview', function() {
-    MainController::overview();
+    ViewController::overview();
 });
 
 $routes->get('/questionnaires', function() {
-    MainController::questionnaires();
+    ViewController::questionnaires();
 });
 
 $routes->get('/overview/:questionnaire_id', function($questionnaire_id) {
-    MainController::show($questionnaire_id);
+    ViewController::show($questionnaire_id);
 });
 
 $routes->get('/query', function() {
-    MainController::query();
+    ViewController::query();
 });
 
 $routes->get('/insertoverview1', function() {
-    MainController::insertoverview1();
+    ViewController::insertoverview1();
 });
 
 $routes->get('/insertoverview2', function() {
-    MainController::insertoverview2();
+    ViewController::insertoverview2();
 });
 
 $routes->post('/insertquestionnaire', function() {
-    MainController::insertquestionnaire();
+    DataController::insertquestionnaire();
 });
 
 $routes->post('/insertquestionsanswers', function() {
-    MainController::insertquestionsanswers();
+    DataController::insertquestionsanswers();
 });
 
 $routes->get('/viewedit', function() {
-    MainController::viewedit();
+    ViewController::viewedit();
 });
 
 $routes->get('/edit/:id', function($id) {
-    MainController::edit($id);
+    ViewController::edit($id);
 });
 
 $routes->post('/updatequestionnaire/:id', function($id) {
-    MainController::updatequestionnaire($id);
+    DataController::updatequestionnaire($id);
 });
 
 $routes->get('/viewremovequestionnaire', function() {
-    MainController::viewremovequestionnaire();
+    ViewController::viewremovequestionnaire();
 });
 
 $routes->post('/removequestionnaire/:id', function($id) {
-    MainController::removequestionnaire($id);
+    DataController::removequestionnaire($id);
 });
 
 $routes->get('/viewremoveanswer/:questionnaire_id', function($questionnaire_id) {
-    MainController::viewremoveanswer($questionnaire_id);
+    ViewController::viewremoveanswer($questionnaire_id);
 });
 
 $routes->post('/removeanswer/:id', function($id) {
-    MainController::removeanswer($id);
+    DataController::removeanswer($id);
 });

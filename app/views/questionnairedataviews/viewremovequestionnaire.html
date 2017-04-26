@@ -20,7 +20,7 @@
             <td>{{row.customer_company}}</td>
             <td>{{row.vat_number}}</td>
             <td>
-                <form method="post" action="{{base_path}}/removequestionnaire/{{row.questionnaire_id}}" >
+                <form method="post" action="{{base_path}}/removequestionnaire/{{row.questionnaire_id}}" class="destroy-form" data-confirm="Are you sure you want to remove this questionnaire?" >
                     <button type="submit" class="btn btn-danger">Remove</button>
                 </form>
             </td>

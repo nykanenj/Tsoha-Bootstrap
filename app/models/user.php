@@ -2,11 +2,24 @@
 
 class User extends BaseModel {
 
-    public $user_id, $username, $password;
+    public $user_id, $username, $password, $adminrights;
 
     public function __construct($attributes) {
 
         parent::__construct($attributes);
+        $this->validators = array();
+    }
+
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO usertable (username, password, adminrights) VALUES (:username, :password, :adminrights)');
+        $query->execute(array(
+            'username' => $this->username,
+            'password' => $this->password,
+            'adminrights' => $this->adminrights
+        ));
+
+        //$row = $query->fetch();
+        //$this->user_id = $row['user_id'];
     }
 
     public static function authenticate($user, $pwd) {
@@ -39,7 +52,6 @@ class User extends BaseModel {
             'username' => $rows['username'],
             'adminrights' => $rows['adminrights']
         ));
-        
 
         return $founduser;
     }

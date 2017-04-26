@@ -31,7 +31,7 @@
             <td>{{row.question}}</td>
             <td>{{row.answer}}</td>
             <td>
-                <form method="post" action="{{base_path}}/removeanswer/{{row.questions_answers_id}}" >
+                <form method="post" action="{{base_path}}/removeanswer/{{row.questions_answers_id}}" class="destroy-form" data-confirm="Are you sure you want to remove this row?" >
                     <button type="submit" class="btn btn-danger">Remove</button>
                 </form>
             </td>
