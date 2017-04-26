@@ -13,7 +13,7 @@ Sovellukseen pääsee kirjautumaan sisään seuraavilla tiedoilla
 
 ## Työn aihe
 
-Tietokanta kyselytutkimus -datan tallentamiseen
+Tietokanta kyselytutkimusdatan tallentamiseen
 
 ## Lisenssi
 
