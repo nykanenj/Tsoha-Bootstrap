@@ -5,31 +5,36 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Date</th>
             <th>Questionnaire ID</th>
+            <th>Date</th>
             <th>Questionnaire Name</th>
             <th>Company</th>
             <th>VAT number</th>
+            <th>QuestionsAnswers ID</th>
             <th>qID</th>
             <th>Question</th>
             <th>Answer</th>
+            <th>Respondent name</th>
+            <th>Gender</th>
+            <th>Age</th>
         </tr>
     </thead>
 
     <tbody>
         {% for row in data %}
             <tr>
-              <!-- <td><a href="{{base_path}}/questionnairedataviews/{{data.questiondata_id}}> {{data.questiondata_id}}</td> -->
-              <td>{{row.questions_answers_id}}</td>
-              <td>{{row.project_start}}</td>
               <td>{{row.questionnaire_id}}</td>
+              <td>{{row.project_start}}</td>
               <td>{{row.questionnaire_name}}</a></td>
               <td>{{row.customer_company}}</td>
               <td>{{row.vat_number}}</td>
+              <td>{{row.questions_answers_id}}</td>
               <td>{{row.qid}}</td>
               <td>{{row.question}}</td>
               <td>{{row.answer}}</td>
+              <td>{{row.respondent_name}}</td>
+              <td>{{row.gender}}</td>
+              <td>{{row.age}}</td>
             </tr>
         {% endfor %}
     </tbody>

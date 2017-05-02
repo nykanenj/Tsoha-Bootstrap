@@ -126,7 +126,97 @@ INSERT INTO questions_answers (
     'Mikä talli voittaa mestaruuden tänävuonna?',
     'voittaa',
     'Renault');
-    
 
+INSERT INTO respondent (
+    respondent_name,
+    gender,
+    age) VALUES (
+    'Aura Lumi',
+    'Female',
+    '22');
     
+INSERT INTO respondent (
+    respondent_name,
+    gender,
+    age) VALUES (
+    'Jere Koskinen',
+    'Male',
+    '20');
     
+INSERT INTO respondent (
+    respondent_name,
+    gender,
+    age) VALUES (
+    'Kalle Kalevi',
+    'Male',
+    '29');    
+
+INSERT INTO respondent (
+    respondent_name,
+    gender,
+    age) VALUES (
+    'Sirkku Kaunis',
+    'Female',
+    '21');
+
+INSERT INTO respondent (
+    respondent_name,
+    gender,
+    age) VALUES (
+    'Jyrki Lehto',
+    'Male',
+    '18');
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    1,
+    1);
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    2,
+    2);
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    3,
+    3);
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    4,
+    1);
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    5,
+    4);
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    6,
+    5);
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    7,
+    4);
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    8,
+    3);
+
+INSERT INTO questionrespondent (
+    questions_answers_id,
+    respondent_id) VALUES (
+    9,
+    2);

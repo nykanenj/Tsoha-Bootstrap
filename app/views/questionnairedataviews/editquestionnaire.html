@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit</h1>
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+<form method="post" action="{{base_path}}/updatequestionnaire/{{attributes.questionnaire_id}}">
+    <div class="form-group">
+        <label class="control-label">Questionnaire name*</label>
+        <input name="questionnaire_name" class="form-control" value="{{attributes.questionnaire_name}}" type="text">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Date* (yy-mm-dd)</label>
+        <input name="project_start" class="form-control" value="{{attributes.project_start}}" type="text">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Customer company*</label>
+        <input name="customer_company" class="form-control" value="{{attributes.customer_company}}" type="text">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">VAT number* (1234567-8)</label>
+        <input name="vat_number" class="form-control" value="{{attributes.vat_number}}" type="text">
+    </div>
+
+    <p>*required fields</p>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
+
+{% endblock %}

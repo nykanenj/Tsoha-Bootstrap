@@ -3,7 +3,7 @@
 //The first route that gives a match will be used.
 
 $routes->get('/', function() {
-    UserController::login();
+    ViewController::overview();
 });
 
 $routes->get('/register', function() {
@@ -34,20 +34,20 @@ $routes->get('/questionnaires', function() {
     ViewController::questionnaires();
 });
 
-$routes->get('/overview/:questionnaire_id', function($questionnaire_id) {
+$routes->get('/questionnaire/:questionnaire_id', function($questionnaire_id) {
     ViewController::show($questionnaire_id);
 });
 
-$routes->get('/query', function() {
-    ViewController::query();
+$routes->get('/addquestionnaire', function() {
+    ViewController::addquestionnaire();
 });
 
-$routes->get('/insertoverview1', function() {
-    ViewController::insertoverview1();
+$routes->get('/addquestionsanswers', function() {
+    ViewController::addquestionsanswers();
 });
 
-$routes->get('/insertoverview2', function() {
-    ViewController::insertoverview2();
+$routes->get('/addrespondent', function() {
+    ViewController::addrespondent();
 });
 
 $routes->post('/insertquestionnaire', function() {
@@ -58,28 +58,25 @@ $routes->post('/insertquestionsanswers', function() {
     DataController::insertquestionsanswers();
 });
 
-$routes->get('/viewedit', function() {
-    ViewController::viewedit();
+
+$routes->get('/editquestionnaire/:id', function($id) {
+    ViewController::editquestionnaire($id);
 });
 
-$routes->get('/edit/:id', function($id) {
-    ViewController::edit($id);
+$routes->get('/editanswer/:id', function($id) {
+    ViewController::editanswer($id);
 });
 
 $routes->post('/updatequestionnaire/:id', function($id) {
     DataController::updatequestionnaire($id);
 });
 
-$routes->get('/viewremovequestionnaire', function() {
-    ViewController::viewremovequestionnaire();
+$routes->post('/updateanswer/:id', function($id) {
+    DataController::updateanswer($id);
 });
 
 $routes->post('/removequestionnaire/:id', function($id) {
     DataController::removequestionnaire($id);
-});
-
-$routes->get('/viewremoveanswer/:questionnaire_id', function($questionnaire_id) {
-    ViewController::viewremoveanswer($questionnaire_id);
 });
 
 $routes->post('/removeanswer/:id', function($id) {

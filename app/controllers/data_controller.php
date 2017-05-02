@@ -69,10 +69,34 @@ class DataController extends BaseController {
         if (count($errors) == 0) {
 
             $datarow->updatequestionnaire($id);
-            Redirect::to('/viewedit', array('message' => 'Data edit success!'));
+            Redirect::to('/questionnaires', array('message' => 'Data edit success!'));
         } else {
 
-            View::make('questionnairedataviews/add.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('questionnairedataviews/editquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
+    }
+    
+        public static function updateanswer($id) {
+        self::check_logged_in();
+        $params = $_POST;
+        $attributes = array(
+            'questions_answers_id' => $id,
+            'questionnaire_id' => $params['questionnaire_id'],
+            'question' => $params['question'],
+            'qid' => $params['qid'],
+            'answer' => $params['answer']
+        );
+
+        $datarow = new QuestionsAnswersModel($attributes);
+        $errors = $datarow->errors();
+
+        if (count($errors) == 0) {
+
+            $datarow->updateanswer($id);
+            Redirect::to('/questionnaire/' . $attributes['questionnaire_id'], array('message' => 'Data edit success!'));
+        } else {
+            $data = QuestionDataModel::getAllQuestionnaires();
+            View::make('questionnairedataviews/editanswer.html', array('errors' => $errors, 'attributes' => $attributes, 'data' => $data));
         }
     }
 
@@ -81,7 +105,7 @@ class DataController extends BaseController {
         $datarow = new QuestionDataModel(array('questionnaire_id' => $id));
         $datarow->removequestionnaire();
 
-        Redirect::to('/viewremovequestionnaire', array('message' => 'Questionnaire removed!'));
+        Redirect::to('/questionnaires', array('message' => 'Questionnaire removed!'));
     }
 
     public static function removeanswer($id) {
@@ -89,7 +113,7 @@ class DataController extends BaseController {
         $datarow = new QuestionsAnswersModel(array('questions_answers_id' => $id));
         $datarow->removeanswer();
 
-        Redirect::to('/viewremovequestionnaire', array('message' => 'Row removed!'));
+        Redirect::to('/questionnaires', array('message' => 'Row removed!'));
     }
 
 }

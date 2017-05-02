@@ -25,13 +25,15 @@ CREATE TABLE respondent(
   respondent_id SERIAL PRIMARY KEY,
   respondent_name varchar(40), 
   gender varchar(10),
-  age INTEGER,
-  city varchar(20),
-  address varchar(50)
+  age INTEGER
 );
 
 CREATE TABLE questionrespondent(
-  questions_answers_id INTEGER REFERENCES questions_answers(questions_answers_id),
+  questions_answers_id INTEGER REFERENCES questions_answers(questions_answers_id)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE,
   respondent_id INTEGER REFERENCES respondent(respondent_id)
+  ON UPDATE CASCADE
+  ON DELETE CASCADE
 );
 

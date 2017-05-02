@@ -10,19 +10,33 @@
             <th>Date</th>
             <th>Company</th>
             <th>VAT number</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Remove</th>
         </tr>
     </thead>
 
     <tbody>
         <!-- Listataan rivit taulukkoon tässä loopissa -->
         {% for row in data %}
-            <tr>
-              <td><a href="{{base_path}}/overview/{{row.questionnaire_id}}">{{row.questionnaire_id}}</a></td>
-              <td>{{row.questionnaire_name}}</a></td>
-              <td>{{row.project_start}}</td>
-              <td>{{row.customer_company}}</td>
-              <td>{{row.vat_number}}</td>
-            </tr>
+        <tr>
+            <td>{{row.questionnaire_id}}</td>
+            <td>{{row.questionnaire_name}}</a></td>
+            <td>{{row.project_start}}</td>
+            <td>{{row.customer_company}}</td>
+            <td>{{row.vat_number}}</td>
+            <td>
+                <a href="{{base_path}}/questionnaire/{{row.questionnaire_id}}" class="btn btn-success">View</a>
+            </td>
+            <td>
+                <a href="{{base_path}}/editquestionnaire/{{row.questionnaire_id}}" class="btn btn-warning">Edit</a>
+            </td>
+            <td>
+                <form method="post" action="{{base_path}}/removequestionnaire/{{row.questionnaire_id}}" class="destroy-form" data-confirm="Are you sure you want to remove this questionnaire?" >
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            </td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>

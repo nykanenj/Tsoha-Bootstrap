@@ -19,21 +19,44 @@ class QuestionsAnswersModel extends BaseModel {
         $row = $query->fetch();
         $this->questions_answers_id = $row['questions_answers_id'];
     }
-    
+
     public function removeanswer() {
         $query = DB::connection()->prepare('DELETE FROM questions_answers WHERE questions_answers_id = :questions_answers_id');
         $query->execute(array('questions_answers_id' => $this->questions_answers_id));
         $query->fetch();
     }
 
+    public function getQuestionnaireID() {
+        return $this->questionnaire_id;
+    }
+
+    public static function findAttributesByQuestionsAnswersID($id) {
+
+        $query = DB::connection()->prepare('SELECT * FROM questions_answers WHERE questions_answers_id = :questions_answers_id');
+        $query->execute(array('questions_answers_id' => $id));
+        $row = $query->fetchAll();
+
+        return $row;
+    }
+    
+      public function updateanswer($id) {
+        $query = DB::connection()->prepare('UPDATE questions_answers SET questionnaire_id = :questionnaire_id, question = :question, qid = :qid, answer = :answer WHERE questions_answers_id = :questions_answers_id');
+        $query->execute(array('questionnaire_id' => $this->questionnaire_id,
+            'questions_answers_id' => $id,
+            'question' => $this->question,
+            'qid' => $this->qid,
+            'answer' => $this->answer
+        ));
+        $query->fetch();
+    }
+
     //Validators below
 
     public function validate_questionnaire_id() {
-        
+
         return parent::validate_is_number($this->questionnaire_id, 'Questionnaire ID');
-        
     }
-    
+
     public function validate_qid() {
 
         return parent::validate_string_length($this->qid, 1, 30, 'qid');
