@@ -58,6 +58,10 @@ $routes->post('/insertquestionsanswers', function() {
     DataController::insertquestionsanswers();
 });
 
+$routes->post('/insertrespondent', function() {
+    DataController::insertrespondent();
+});
+
 
 $routes->get('/editquestionnaire/:id', function($id) {
     ViewController::editquestionnaire($id);

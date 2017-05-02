@@ -30,15 +30,6 @@ class QuestionDataModel extends BaseModel {
         $query->fetch();
     }
 
-    public function removequestionnaire() {
-        $query = DB::connection()->prepare('DELETE FROM questions_answers WHERE questionnaire_id = :questionnaire_id');
-        $query->execute(array('questionnaire_id' => $this->questionnaire_id));
-        $query->fetch();
-        $query = DB::connection()->prepare('DELETE FROM questionnaire WHERE questionnaire_id = :questionnaire_id');
-        $query->execute(array('questionnaire_id' => $this->questionnaire_id));
-        $query->fetch();
-    }
-
     public static function getAllData() {
 
         $query = DB::connection()->prepare('SELECT * FROM questions_answers '
@@ -70,27 +61,7 @@ class QuestionDataModel extends BaseModel {
         return $data;
     }
 
-    public static function getAllQuestionnaires() {
-
-        $query = DB::connection()->prepare('SELECT * FROM questionnaire ORDER BY questionnaire_id');
-        $query->execute();
-        $rows = $query->fetchAll();
-        $data = array();
-
-        foreach ($rows as $row) {
-            $data[] = new QuestionDataModel(array(
-                'questionnaire_id' => $row['questionnaire_id'],
-                'project_start' => $row['project_start'],
-                'questionnaire_name' => $row['questionnaire_name'],
-                'customer_company' => $row['customer_company'],
-                'vat_number' => $row['vat_number']
-            ));
-        }
-
-        return $data;
-    }
-
-    public static function findQuestionnaire($questionnaire_id) {
+    public static function findAllDataByQuestionnaire($questionnaire_id) {
 
         $query = DB::connection()->prepare('SELECT * FROM questions_answers '
                                            . 'LEFT JOIN questionnaire ON questions_answers.questionnaire_id = questionnaire.questionnaire_id '

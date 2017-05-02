@@ -5,7 +5,7 @@
  */
 
 class DataController extends BaseController {
-    
+
     public static function insertquestionnaire() {
         self::check_logged_in();
 
@@ -37,7 +37,8 @@ class DataController extends BaseController {
             'questionnaire_id' => $params['questionnaire_id'],
             'question' => $params['question'],
             'qid' => $params['qid'],
-            'answer' => $params['answer']
+            'answer' => $params['answer'],
+            'respondent_id' => $params['respondent_id']
         );
 
         $newquestionanswers = new QuestionsAnswersModel($attributes);
@@ -47,8 +48,30 @@ class DataController extends BaseController {
             $newquestionanswers->savequestions_answers();
             Redirect::to('/overview', array('message' => 'Data added to database!'));
         } else {
-            $data = QuestionDataModel::getAllQuestionnaires();
-            View::make('questionnairedataviews/addquestionsanswers.html', array('errors' => $errors, 'attributes' => $attributes, 'data' => $data));
+            $questionnairedata = QuestionnaireModel::getAllQuestionnaires();
+            $respondentdata = RespondentModel::getAllRespondents();
+            View::make('questionnairedataviews/addquestionsanswers.html', array('errors' => $errors, 'attributes' => $attributes, 'questionnairedata' => $questionnairedata, 'respondentdata' => $respondentdata));
+        }
+    }
+
+    public static function insertrespondent() {
+        self::check_logged_in();
+
+        $params = $_POST;
+        $attributes = array(
+            'respondent_name' => $params['respondent_name'],
+            'gender' => $params['gender'],
+            'age' => $params['age']
+        );
+
+        $newrespondent = new RespondentModel($attributes);
+        $errors = $newrespondent->errors();
+
+        if (count($errors) == 0) {
+            $newrespondent->saverespondent();
+            Redirect::to('/addrespondent', array('message' => 'Respondent added to database!'));
+        } else {
+            View::make('questionnairedataviews/addquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
@@ -75,8 +98,8 @@ class DataController extends BaseController {
             View::make('questionnairedataviews/editquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
-    
-        public static function updateanswer($id) {
+
+    public static function updateanswer($id) {
         self::check_logged_in();
         $params = $_POST;
         $attributes = array(
@@ -102,17 +125,13 @@ class DataController extends BaseController {
 
     public static function removequestionnaire($id) {
         self::check_logged_in();
-        $datarow = new QuestionDataModel(array('questionnaire_id' => $id));
-        $datarow->removequestionnaire();
-
+        QuestionnaireModel::removeQuestionnaire($id);
         Redirect::to('/questionnaires', array('message' => 'Questionnaire removed!'));
     }
 
     public static function removeanswer($id) {
         self::check_logged_in();
-        $datarow = new QuestionsAnswersModel(array('questions_answers_id' => $id));
-        $datarow->removeanswer();
-
+        QuestionsAnswersModel::removeanswer($id);
         Redirect::to('/questionnaires', array('message' => 'Row removed!'));
     }
 

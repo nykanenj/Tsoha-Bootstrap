@@ -14,18 +14,17 @@ class ViewController extends BaseController {
 
     public static function questionnaires() {
         self::check_logged_in();
-        $data = QuestionDataModel::getAllQuestionnaires();
+        $data = QuestionnaireModel::getAllQuestionnaires();
         View::make('questionnairedataviews/questionnaires.html', array('data' => $data));
     }
 
     public static function show($questionnaire_id) {
         self::check_logged_in();
-        $data = QuestionDataModel::findQuestionnaire($questionnaire_id);
+        $data = QuestionDataModel::findAllDataByQuestionnaire($questionnaire_id);
         if (empty($data)) {
-            $data = QuestionDataModel::getAllQuestionnaires();
+            $data = QuestionnaireModel::getAllQuestionnaires();
             View::make('questionnairedataviews/questionnaires.html', array('data' => $data, 'error' => 'No data to show for this questionnaire!'));
         }
-        Kint::dump($data);
         $title = $data[0]->questionnaire_name;
         View::make('questionnairedataviews/questionnaire.html', array('data' => $data, 'title' => $title));
     }
@@ -37,8 +36,9 @@ class ViewController extends BaseController {
 
     public static function addquestionsanswers() {
         self::check_logged_in();
-        $data = QuestionDataModel::getAllQuestionnaires();
-        View::make('questionnairedataviews/addquestionsanswers.html', array('data' => $data));
+        $questionnairedata = QuestionnaireModel::getAllQuestionnaires();
+        $respondentdata = RespondentModel::getAllRespondents();
+        View::make('questionnairedataviews/addquestionsanswers.html', array('questionnairedata' => $questionnairedata, 'respondentdata' => $respondentdata));
     }
     
     public static function addrespondent() {

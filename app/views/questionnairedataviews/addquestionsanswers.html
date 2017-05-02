@@ -18,7 +18,7 @@
     <div class="form-group">
         <label>Questionnaire*</label>
         <select class="form-control" name="questionnaire_id">
-            {% for row in data %}
+            {% for row in questionnairedata %}
                 <option value="{{row.questionnaire_id}}">{{row.questionnaire_name}} </option>
             {% endfor %}
         </select>
@@ -37,6 +37,15 @@
     <div class="form-group">
         <label class="control-label">Answer*</label>
         <input name="answer" class="form-control" value="{{attributes.answer}}" type="text">
+    </div>
+    
+     <div class="form-group">
+        <label>Respondent*</label>
+        <select class="form-control" name="respondent_id">
+            {% for respondent in respondentdata %}
+                <option value="{{respondent.respondent_id}}">{{respondent.respondent_name}} </option>
+            {% endfor %}
+        </select>
     </div>
 
     <p>*required fields</p>

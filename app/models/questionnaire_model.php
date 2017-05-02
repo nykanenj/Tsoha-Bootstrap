@@ -9,7 +9,7 @@ class QuestionnaireModel extends BaseModel {
         $this->validators = array('validate_questionnaire_name', 'validate_project_start', 'validate_customer_company', 'validate_vat_number'); //Add more with a comma
     }
 
-    public function savequestionnaire() {
+    public function saveQuestionnaire() {
         $query = DB::connection()->prepare('INSERT INTO questionnaire (project_start, questionnaire_name, customer_company, vat_number) VALUES (:project_start, :questionnaire_name, :customer_company, :vat_number) RETURNING questionnaire_id');
         $query->execute(array(
             'project_start' => $this->project_start,
@@ -22,6 +22,26 @@ class QuestionnaireModel extends BaseModel {
         $this->questionnaire_id = $row['questionnaire_id'];
     }
 
+    public static function getAllQuestionnaires() {
+
+        $query = DB::connection()->prepare('SELECT * FROM questionnaire ORDER BY questionnaire_id');
+        $query->execute();
+        $rows = $query->fetchAll();
+        $data = array();
+
+        foreach ($rows as $row) {
+            $data[] = new QuestionDataModel(array(
+                'questionnaire_id' => $row['questionnaire_id'],
+                'project_start' => $row['project_start'],
+                'questionnaire_name' => $row['questionnaire_name'],
+                'customer_company' => $row['customer_company'],
+                'vat_number' => $row['vat_number']
+            ));
+        }
+
+        return $data;
+    }
+
     public static function findAttributesByQuestionnaireID($id) {
 
         $query = DB::connection()->prepare('SELECT * FROM questionnaire WHERE questionnaire_id = :questionnaire_id');
@@ -31,7 +51,7 @@ class QuestionnaireModel extends BaseModel {
         return $row;
     }
 
-    public function updatequestionnaire($id) {
+    public function updateQuestionnaire($id) {
         $query = DB::connection()->prepare('UPDATE questionnaire SET project_start = :project_start, questionnaire_name = :questionnaire_name, customer_company = :customer_company, vat_number = :vat_number WHERE questionnaire_id = :questionnaire_id');
         $query->execute(array('questionnaire_id' => $this->questionnaire_id,
             'project_start' => $this->project_start,
@@ -43,12 +63,20 @@ class QuestionnaireModel extends BaseModel {
         $query->fetch();
     }
 
+    public function removeQuestionnaire($id) {
+        $query = DB::connection()->prepare('DELETE FROM questions_answers WHERE questionnaire_id = :questionnaire_id');
+        $query->execute(array('questionnaire_id' => $id));
+        $query->fetch();
+        $query = DB::connection()->prepare('DELETE FROM questionnaire WHERE questionnaire_id = :questionnaire_id');
+        $query->execute(array('questionnaire_id' => $id));
+        $query->fetch();
+    }
+
     //Validators below
-    
+
     public function validate_questionnaire_id() {
-        
+
         return parent::validate_is_number($this->questionnaire_id, 'Questionnaire ID');
-        
     }
 
     public function validate_questionnaire_name() {
