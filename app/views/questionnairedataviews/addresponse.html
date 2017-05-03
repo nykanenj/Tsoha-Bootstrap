@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Add row with question and answer to database</h1>
+<h1>Add response to database</h1>
 
 {% if errors %}
 <div class="alert alert-danger">
@@ -13,7 +13,7 @@
 {% endif %}
 
 
-<form method="post" action="{{base_path}}/insertquestionsanswers">
+<form method="post" action="{{base_path}}/insertresponse">
 
     <div class="form-group">
         <label>Questionnaire*</label>

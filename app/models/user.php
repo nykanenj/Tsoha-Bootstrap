@@ -7,7 +7,7 @@ class User extends BaseModel {
     public function __construct($attributes) {
 
         parent::__construct($attributes);
-        $this->validators = array();
+        $this->validators = array('validate_username', 'validate_password');
     }
 
     public function save() {
@@ -54,6 +54,16 @@ class User extends BaseModel {
         ));
 
         return $founduser;
+    }
+
+    //Validators below
+
+    public function validate_username() {
+        return parent::validate_string_length($this->username, 3, 30, 'Username');
+    }
+
+    public function validate_password() {
+        return parent::validate_string_length($this->password, 6, 30, 'Password');
     }
 
 }

@@ -31,7 +31,7 @@
                 <a href="{{base_path}}/editanswer/{{row.questions_answers_id}}" class="btn btn-warning">Edit</a>
             </td>
             <td>
-                <form method="post" action="{{base_path}}/removeanswer/{{row.questions_answers_id}}" class="destroy-form" data-confirm="Are you sure you want to remove this row?" >
+                <form method="post" action="{{base_path}}/removeanswer/{{row.questionnaire_id}}/{{row.questions_answers_id}}" class="destroy-form" data-confirm="Are you sure you want to remove this row?" >
                     <button type="submit" class="btn btn-danger">Remove</button>
                 </form>
             </td>

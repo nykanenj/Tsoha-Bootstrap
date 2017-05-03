@@ -26,7 +26,7 @@ class UserController extends BaseController {
             $newuser->save();
             Redirect::to('/login', array('message' => 'Account created successfully! Please login'));
         } else {
-            View::make('questionnairedataviews/register.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('userviews/register.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 

@@ -22,13 +22,13 @@ class DataController extends BaseController {
 
         if (count($errors) == 0) {
             $newquestionnaire->savequestionnaire();
-            Redirect::to('/overview', array('message' => 'Data added to database!'));
+            Redirect::to('/addquestionnaire', array('message' => 'New questionnaire saved to database!'));
         } else {
             View::make('questionnairedataviews/addquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
-    public static function insertquestionsanswers() {
+    public static function insertresponse() {
         self::check_logged_in();
 
         $params = $_POST;
@@ -46,11 +46,11 @@ class DataController extends BaseController {
 
         if (count($errors) == 0) {
             $newquestionanswers->savequestions_answers();
-            Redirect::to('/overview', array('message' => 'Data added to database!'));
+            Redirect::to('/addresponse', array('message' => 'Response saved to database!'));
         } else {
             $questionnairedata = QuestionnaireModel::getAllQuestionnaires();
             $respondentdata = RespondentModel::getAllRespondents();
-            View::make('questionnairedataviews/addquestionsanswers.html', array('errors' => $errors, 'attributes' => $attributes, 'questionnairedata' => $questionnairedata, 'respondentdata' => $respondentdata));
+            View::make('questionnairedataviews/addresponse.html', array('errors' => $errors, 'attributes' => $attributes, 'questionnairedata' => $questionnairedata, 'respondentdata' => $respondentdata));
         }
     }
 
@@ -69,9 +69,9 @@ class DataController extends BaseController {
 
         if (count($errors) == 0) {
             $newrespondent->saverespondent();
-            Redirect::to('/addrespondent', array('message' => 'Respondent added to database!'));
+            Redirect::to('/addrespondent', array('message' => 'New respondent saved to database!'));
         } else {
-            View::make('questionnairedataviews/addquestionnaire.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('questionnairedataviews/addrespondent.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
 
@@ -118,7 +118,7 @@ class DataController extends BaseController {
             $datarow->updateanswer($id);
             Redirect::to('/questionnaire/' . $attributes['questionnaire_id'], array('message' => 'Data edit success!'));
         } else {
-            $data = QuestionDataModel::getAllQuestionnaires();
+            $data = QuestionnaireModel::getAllQuestionnaires();
             View::make('questionnairedataviews/editanswer.html', array('errors' => $errors, 'attributes' => $attributes, 'data' => $data));
         }
     }
@@ -129,10 +129,10 @@ class DataController extends BaseController {
         Redirect::to('/questionnaires', array('message' => 'Questionnaire removed!'));
     }
 
-    public static function removeanswer($id) {
+    public static function removeanswer($questionnaire_id, $questions_answers_id) {
         self::check_logged_in();
-        QuestionsAnswersModel::removeanswer($id);
-        Redirect::to('/questionnaires', array('message' => 'Row removed!'));
+        QuestionsAnswersModel::removeanswer($questions_answers_id);
+        Redirect::to('/questionnaire/' . $questionnaire_id, array('message' => 'Row removed!'));
     }
 
 }

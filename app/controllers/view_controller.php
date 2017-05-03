@@ -34,11 +34,11 @@ class ViewController extends BaseController {
         View::make('questionnairedataviews/addquestionnaire.html');
     }
 
-    public static function addquestionsanswers() {
+    public static function addresponse() {
         self::check_logged_in();
         $questionnairedata = QuestionnaireModel::getAllQuestionnaires();
         $respondentdata = RespondentModel::getAllRespondents();
-        View::make('questionnairedataviews/addquestionsanswers.html', array('questionnairedata' => $questionnairedata, 'respondentdata' => $respondentdata));
+        View::make('questionnairedataviews/addresponse.html', array('questionnairedata' => $questionnairedata, 'respondentdata' => $respondentdata));
     }
     
     public static function addrespondent() {
@@ -56,7 +56,7 @@ class ViewController extends BaseController {
     public static function editanswer($id) {
         self::check_logged_in();
         $attributes = QuestionsAnswersModel::findAttributesByQuestionsAnswersID($id);
-        $data = QuestionDataModel::getAllQuestionnaires();
+        $data = QuestionnaireModel::getAllQuestionnaires();
         View::make('questionnairedataviews/editanswer.html', array('attributes' => $attributes[0], 'data' => $data));
     }
 

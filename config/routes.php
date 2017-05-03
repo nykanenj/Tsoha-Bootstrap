@@ -42,8 +42,8 @@ $routes->get('/addquestionnaire', function() {
     ViewController::addquestionnaire();
 });
 
-$routes->get('/addquestionsanswers', function() {
-    ViewController::addquestionsanswers();
+$routes->get('/addresponse', function() {
+    ViewController::addresponse();
 });
 
 $routes->get('/addrespondent', function() {
@@ -54,14 +54,13 @@ $routes->post('/insertquestionnaire', function() {
     DataController::insertquestionnaire();
 });
 
-$routes->post('/insertquestionsanswers', function() {
-    DataController::insertquestionsanswers();
+$routes->post('/insertresponse', function() {
+    DataController::insertresponse();
 });
 
 $routes->post('/insertrespondent', function() {
     DataController::insertrespondent();
 });
-
 
 $routes->get('/editquestionnaire/:id', function($id) {
     ViewController::editquestionnaire($id);
@@ -83,6 +82,6 @@ $routes->post('/removequestionnaire/:id', function($id) {
     DataController::removequestionnaire($id);
 });
 
-$routes->post('/removeanswer/:id', function($id) {
-    DataController::removeanswer($id);
+$routes->post('/removeanswer/:questionnaire_id/:questions_answers_id', function($questionnaire_id, $questions_answers_id) {
+    DataController::removeanswer($questionnaire_id, $questions_answers_id);
 });
